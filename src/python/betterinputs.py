@@ -381,7 +381,7 @@ for j in range(len(N_Comp1)):
  #       print(N_Comp2[i], file=open('3varComp2.csv', 'a'))
 
 for i in range(len(Comp3)):
-        print(N_Comp3[i], file=open('2varComp3.csv', 'a'))
+        print(N_Comp3[i], file=open('../../prover9/inputs/2varComp3.csv', 'a'))
         
 
 

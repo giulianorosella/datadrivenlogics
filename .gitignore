@@ -1,0 +1,15 @@
+# Ignore Python bytecode files
+*.pyc
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore virtual environment directories
+venv/
+
+# Ignore log files
+*.log
+
+# Ignore compiled binaries
+*.exe
+*.dll
