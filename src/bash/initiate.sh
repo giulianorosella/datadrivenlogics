@@ -20,7 +20,7 @@ activate_venv() {
 # Activate virtual environment
 activate_venv
 
-# Install dependencies from requirements.txt 
+# Install dependencies from requirements.txt
 # only i fnot already there
 if [ -f "$requirements_py" ]; then
     if ! pip show -q -r "$requirements_py"; then
@@ -32,7 +32,6 @@ if [ -f "$requirements_py" ]; then
 else
     echo "No $requirements_py file found."
 fi
-
 
 # Check if the Python script exists
 if [ ! -f "$python_script" ]; then
@@ -48,7 +47,6 @@ if [ $? -ne 0 ]; then
     echo "Error: Python script '$python_script' failed to execute."
     exit 1
 fi
-
 
 # Deactivate virtual environment
 deactivate
