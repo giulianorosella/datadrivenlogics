@@ -1,2 +1,2 @@
 # datadrivenlogics
-Data-Driven Investigaton of Logics
+A project for developing quantitative methods to investigates logics and their relationiships. 
