@@ -176,14 +176,14 @@ print('number of intTh3:'+str(int(len(IntTh3))))
 Th3_tocchek= list(set(Possth3) - set(IntTh3))
 
 for i in range(len(Possth1)):
-    print(str(Possth1[i]), file=open('3varTh1.xls', 'a'))
+    print(str(Possth1[i]), file=open('../../prover9/inputs/3varTh1.xls', 'a'))
 
 for i in range(len(Possth2)):
-    print(str(Possth2[i]), file=open('3varTh2.xls', 'a'))
+    print(str(Possth2[i]), file=open('../prover9/inputs/3varTh2.xls', 'a'))
 
 
 for i in range(len(Possth3)):
-    print(str(Possth3[i]), file=open('3varTh3.xls', 'a'))    
+    print(str(Possth3[i]), file=open('../../prover9/inputs/3varTh3.xls', 'a'))    
 
 
 
