@@ -1,9 +1,8 @@
 #!/bin/bash
 
-echo "Execute initiate.sh in: $(pwd)"
-# usefull vars
-requirements_py="src/python/requirements.txt"
-python_script="src/python/betterinputs.py"
+echo "Execute launch_py in: $(pwd)"
+
+source src/bash/vars.sh
 
 # Function to activate virtual environment
 activate_venv() {
