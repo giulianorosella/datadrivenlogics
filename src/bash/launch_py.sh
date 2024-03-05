@@ -2,7 +2,7 @@
 
 echo "Execute launch_py in: $(pwd)"
 
-source src/bash/vars.sh
+source src/bash/vars/vars_py.sh
 
 # Function to activate virtual environment
 activate_venv() {
