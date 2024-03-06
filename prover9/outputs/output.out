@@ -1,7 +1,7 @@
 ============================== Prover9 ===============================
 Prover9 (64) version 2009-11A, November 2009.
-Process 39598 was started by ale on arch.ariel.linux,
-Tue Mar  5 16:46:51 2024
+Process 7984 was started by ale on arch.ariel.linux,
+Wed Mar  6 16:41:34 2024
 The command was "prover9/bin/LADR-2009-11A/bin/prover9 -f prover9/inputs/test.in".
 ============================== end of head ===========================
 
@@ -705,7 +705,7 @@ given #206 (T,wt=11): 3957 x v ((y ^ x) v (x ^ z)) = x.  [para(1563(a,1),3829(a,
 
 ============================== PROOF =================================
 
-% Proof 4 at 0.51 (+ 0.02) seconds: McKenzie_3.
+% Proof 4 at 0.53 (+ 0.01) seconds: McKenzie_3.
 % Length of proof is 61.
 % Level of proof is 24.
 % Maximum clause weight is 89.000.
@@ -787,7 +787,7 @@ Demod_attempts=1732461. Demod_rewrites=113997.
 Res_instance_prunes=0. Para_instance_prunes=0. Basic_paramod_prunes=0.
 Nonunit_fsub_feature_tests=0. Nonunit_bsub_feature_tests=0.
 Megabytes=12.64.
-User_CPU=0.51, System_CPU=0.02, Wall_clock=0.
+User_CPU=0.54, System_CPU=0.01, Wall_clock=1.
 
 ============================== end of statistics =====================
 
@@ -799,6 +799,6 @@ THEOREM PROVED
 
 Exiting with 4 proofs.
 
------- process 39598 exit (max_proofs) ------
+------ process 7984 exit (max_proofs) ------
 
-Process 39598 exit (max_proofs) Tue Mar  5 16:46:51 2024
+Process 7984 exit (max_proofs) Wed Mar  6 16:41:35 2024

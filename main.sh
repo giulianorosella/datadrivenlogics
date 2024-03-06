@@ -9,7 +9,7 @@ launch_prover9="src/bash/launch_prover.sh"
 echo "Executing main.sh in $(pwd)"
 
 # Call python modules
-#"$launch_py"
+"$launch_py"
 
 # Call prover9 modules only if test passes
 verify_and_launch() {

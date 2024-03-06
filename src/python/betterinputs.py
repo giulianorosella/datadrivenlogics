@@ -1,7 +1,7 @@
 from z3 import *
-import csv
-import itertools
-import subprocess
+# import csv
+# import itertools
+# import subprocess
 
 # create a fresh propositional variable uniquely identified by its name 'p'
 A = Bool('A')
