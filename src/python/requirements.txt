@@ -1,2 +1,4 @@
 z3-solver
 flake8
+flake8-mypy
+myPy
