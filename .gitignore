@@ -1,5 +1,6 @@
 # Ignore Python bytecode files
 *.pyc
+.mypy_cache
 
 # Ignore macOS system files
 .DS_Store
