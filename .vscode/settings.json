@@ -25,5 +25,6 @@
     "mypy-type-checker.args": [
         "--strict",
         "--disallow_untyped_defs"
-    ]
+    ],
+    "go.formatTool": "gofmt"
 }
