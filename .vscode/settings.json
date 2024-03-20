@@ -1,5 +1,5 @@
 {
-    "python.defaultInterpreterPath": "/bin/python",
+    "python.defaultInterpreterPath": "venv/bin/python",
     "workbench.productIconTheme": "fluent-icons",
     "git.confirmSync": false,
     "[python]": {
@@ -8,8 +8,10 @@
         "editor.insertSpaces": true,
         "editor.tabSize": 4
     },
-    "python.languageServer": "Pylance",
     "python.terminal.activateEnvInCurrentTerminal": true,
+    "black-formatter.path": [
+        "venv/bin/black"
+    ],
     "black-formatter.args": [
         "--line-length=79"
     ],
@@ -17,12 +19,10 @@
         "venv/bin/flake8"
     ],
     "flake8.args": ["--check"],
-    "black-formatter.path": [
-        "venv/bin/black"
-    ],
+    "mypy-type-checker.path": ["venv/bin/mypy"],
     "mypy-type-checker.importStrategy": "fromEnvironment",
     "mypy-type-checker.args": [
         "--strict",
         "--disallow_untyped_defs"
-    ],
+    ]
 }

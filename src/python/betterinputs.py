@@ -316,7 +316,6 @@ for j in range(len(N_Comp1)):
 for i in range(len(Comp3)):
     print(N_Comp3[i], file=open("../../prover9/inputs/2varComp3.csv", "a"))
 
-
 # for i in range(len(Comp1)):
 #  solve(Not(Comp1[i]))
 
