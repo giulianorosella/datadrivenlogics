@@ -3,6 +3,7 @@
 echo "Execute launch_prover in: $(pwd)"
 
 source src/bash/vars/vars_prover.sh
+source src/bash/verify_prover.sh
 
 prove() {
     local input="$1"
@@ -13,4 +14,24 @@ prove() {
     echo "done"
 }
 
-prove $input_path $output_path
+# Call prover9 modules only if test passes
+verify_and_launch() {
+    check_prover9
+    echo
+
+    test_prover
+    echo
+
+    if [ $? -eq 0 ]; then
+        echo "Prover9 verification successful. Launching Prover9."
+        # Execute the launch.sh script
+        prove $input_path $output_path
+        
+    else
+        echo "Error: Prover9 verification failed. Aborting."
+        exit 1
+    fi
+}
+
+verify_and_launch
+

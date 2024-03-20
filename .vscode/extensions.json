@@ -6,6 +6,7 @@
         "ms-python.mypy-type-checker",
         "ms-python.python",
         "ms-python.debugpy",
-        "mkhl.shfmt"
+        "mkhl.shfmt",
+        "golang.go"
     ]
 }
