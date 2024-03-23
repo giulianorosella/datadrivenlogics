@@ -1,0 +1,7 @@
+{
+    "csvFilePath": "../../../bin/excel/2VarComp2.csv",
+    "csvComma": ";",
+    "formulasChunkLength": 10,
+    "formulasPrefix": "(",
+    "formulasSuffix": "= 1."
+}
