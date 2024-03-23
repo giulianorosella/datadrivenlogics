@@ -12,7 +12,6 @@ for i in range(len(Var)):
 
 print(Comp1)
 
-
 # for i in range(len(Comp1)):
 #   print(Comp1[i], file=open('4varComp1.xls', 'a'))
 
@@ -137,6 +136,7 @@ Th2_tocchek = list(set(Possth2) - set(IntTh2))
 
 
 Possth3 = []
+
 
 for i in range(len(Comp3)):
     if "*" in Comp3[i]:
