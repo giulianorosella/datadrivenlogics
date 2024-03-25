@@ -24,7 +24,7 @@
     "mypy-type-checker.importStrategy": "fromEnvironment",
     "mypy-type-checker.args": [
         "--strict",
-        "--disallow_untyped_defs"
+        "--disallow-untyped-defs"
     ],
     "go.formatTool": "gofmt"
 }

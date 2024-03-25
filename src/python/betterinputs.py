@@ -38,7 +38,7 @@ C = Bool("C")
 # Other useful connectives:
 # Implies, And, Or
 
-Var = [A, B, False]
+Var = [A, B, C, False]
 
 
 Comp1 = []
@@ -101,8 +101,8 @@ for i in range(len(Comp2)):
         Comp3.append(And(Var[h], Comp2[i]))
         Comp3.append(Or(Var[h], Comp2[i]))
         Comp3.append(Implies(Comp2[i], Var[h]))
-        # Comp3.append(And(Comp2[i], Var[h]))
-        # Comp3.append(Or(Comp2[i], Var[h]))
+        Comp3.append(And(Comp2[i], Var[h]))
+        Comp3.append(Or(Comp2[i], Var[h]))
 
 
 for j in range(len(Comp1)):
@@ -112,7 +112,7 @@ for j in range(len(Comp1)):
         Comp3.append(Or(Comp1[j], Comp1[lens]))
 
 
-# print('Number of Comp3  ' + str(int(len(Comp3))))
+print("Number of Comp3  " + str(int(len(Comp3))))
 
 
 # Comp4 = []
