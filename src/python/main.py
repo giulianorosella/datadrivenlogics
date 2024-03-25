@@ -5,7 +5,7 @@ from openpyxl import load_workbook
 import pandas as pd  # type: ignore
 from theorem_checker import th_checker  # type: ignore
 from formulas_generator import *  # type: ignore
-from vars import path_ex  # type: ignore
+from vars import path_ex, rows_numbers  # type: ignore
 
 
 def divide(list: List[Any], length: int) -> Any:
@@ -21,8 +21,8 @@ def divide(list: List[Any], length: int) -> Any:
 def move_to_ex() -> Any:
     formule: List[Any] = formulas_prov9(con_numbers)
     solutions: List[Any] = th_checker(formulas_z3(con_numbers))
-    formule_divise: List[Any] = divide(formule, 1048500)
-    solutions_divise: List[Any] = divide(solutions, 1048500)
+    formule_divise: List[Any] = divide(formule, rows_numbers)
+    solutions_divise: List[Any] = divide(solutions, rows_numbers)
     for i in range(len(formule_divise)):
         writer = pd.ExcelWriter(
             path_ex

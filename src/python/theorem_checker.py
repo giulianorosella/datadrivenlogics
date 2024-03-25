@@ -1,4 +1,4 @@
-from formulas_generator import formulas_z3
+from formulas_generator import formulas_z3  # type: ignore
 from typing import List, Any
 from z3 import solve, Not, And, Implies, Bool, Solver, sat, unsat  # type: ignore
 

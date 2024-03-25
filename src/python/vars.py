@@ -36,3 +36,6 @@ con_numbers = 1  # the number of connectives we want to have
 
 
 path_ex = "prover9/sheet_excel/"
+
+
+rows_numbers = 1048575
