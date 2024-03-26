@@ -20,3 +20,10 @@ prover9/bin/LADR-2009-11A
 
 #Ignore go bin folder
 bin
+
+#Ignore mypychache
+mypy_cache
+src/python/__pycache__
+src/python/formulas/__pycache__
+src/python/utils/__pycache__
+src/python/vars/__pycache__

@@ -1,11 +1,9 @@
-from openpyxl import Workbook  # type: ignore
+from openpyxl import load_workbook, Workbook  # type: ignore
 from typing import List, Any
-from vars import var_numbers, con_numbers
-from openpyxl import load_workbook
+from vars.vars import var_numbers, con_numbers, path_ex, rows_numbers  # type: ignore
 import pandas as pd  # type: ignore
-from theorem_checker import th_checker  # type: ignore
-from formulas_generator import *  # type: ignore
-from vars import path_ex, rows_numbers  # type: ignore
+from utils.theorem_checker import th_checker  # type: ignore
+from formulas.formulas_generator import formulas_prov9, formulas_z3, formulas  # type: ignore
 
 
 def divide(list: List[Any], length: int) -> Any:

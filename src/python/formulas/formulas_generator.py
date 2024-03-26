@@ -1,6 +1,6 @@
-from binary_combinations import binary_comb_prov9, binary_comb_z3  # type: ignore
+from formulas.binary_combinations import binary_comb_prov9, binary_comb_z3  # type: ignore
 
-from vars import atoms_for_prover, atoms_for_z3, con_numbers, var_numbers  # type: ignore
+from vars.vars import atoms_for_prover, atoms_for_z3, con_numbers, var_numbers  # type: ignore
 
 from typing import Any, List
 
