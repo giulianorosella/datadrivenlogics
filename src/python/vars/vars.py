@@ -1,8 +1,6 @@
 from typing import Any, List
 
-from z3 import (
-    Bool,
-)  # type:ignore
+from z3 import Bool  # type: ignore
 
 from string import (
     ascii_uppercase,

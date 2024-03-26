@@ -1,9 +1,5 @@
 from typing import List, Any
-from z3 import (
-    Not,
-    Solver,
-    unsat,
-)  # type:ignore
+from z3 import Not, Solver, unsat  # type:ignore
 
 
 def th_checker(arg1: List[Any]) -> List[Any]:
