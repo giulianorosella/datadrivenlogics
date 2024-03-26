@@ -32,10 +32,10 @@ bool_vars: List[Any] = generate_bool_vars()
 atoms_for_z3: List[Any] = [False] + bool_vars
 # the list of our atomic formulas that can be the inputs for z3, i.e. propositional variables plus the bottom element, which is the boolean constant "False"
 
-con_numbers = 1  # the number of connectives we want to have
+con_numbers = 2  # the number of connectives we want to have
 
 
 path_ex = "prover9/sheet_excel/"
 
 
-rows_numbers = 1048575
+rows_numbers = 1045500
