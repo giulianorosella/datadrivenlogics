@@ -1,6 +1,5 @@
 {
     "python.defaultInterpreterPath": "venv/bin/python",
-    "workbench.productIconTheme": "fluent-icons",
     "git.confirmSync": false,
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
@@ -8,7 +7,6 @@
         "editor.insertSpaces": true,
         "editor.tabSize": 4
     },
-    "python.languageServer": "Pylance",
     "python.terminal.activateEnvInCurrentTerminal": true,
     "black-formatter.path": [
         "venv/bin/black"
@@ -19,7 +17,6 @@
     "flake8.path": [
         "venv/bin/flake8"
     ],
-    "flake8.args": ["--check"],
     "mypy-type-checker.path": ["venv/bin/mypy"],
     "mypy-type-checker.importStrategy": "fromEnvironment",
     "mypy-type-checker.args": [

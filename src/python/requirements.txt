@@ -3,3 +3,5 @@ flake8
 myPy
 pylance
 black
+pandas
+openpyxl

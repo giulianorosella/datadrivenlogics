@@ -1,9 +1,17 @@
 from openpyxl import load_workbook, Workbook  # type: ignore
 from typing import List, Any
-from vars.vars import var_numbers, con_numbers, path_ex, rows_numbers  # type: ignore
-import pandas as pd  # type: ignore
-from utils.theorem_checker import th_checker  # type: ignore
-from formulas.formulas_generator import formulas_prov9, formulas_z3, formulas  # type: ignore
+from vars.vars import (
+    var_numbers,
+    con_numbers,
+    path_ex,
+    rows_numbers,
+)  # type:ignore
+import pandas as pd  # type:ignore
+from utils.theorem_checker import th_checker  # type:ignore
+from formulas.formulas_generator import (
+    formulas_prov9,
+    formulas_z3,
+)  # type:ignore
 
 
 def divide(list: List[Any], length: int) -> Any:
@@ -13,7 +21,8 @@ def divide(list: List[Any], length: int) -> Any:
     return division
 
 
-# function that divide a given list in sublists, this is needed if our formulas exceed the length of an excel sheet
+# function that divide a given list in sublists, this is needed
+# if our formulas exceed the length of an excel sheet
 
 
 def move_to_ex() -> Any:
@@ -55,4 +64,5 @@ def move_to_ex() -> Any:
 move_to_ex()
 
 # main function that move formulas and solutions to the excel sheet;
-# it separates into different excel if the number of formulas exceeds the length of the sheet
+# it separates into different excel if the number of formulas e
+# xceeds the length of the sheet

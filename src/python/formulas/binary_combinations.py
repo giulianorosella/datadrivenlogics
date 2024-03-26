@@ -23,7 +23,8 @@ def binary_comb_z3(list1: List[Any], list2: List[Any]) -> List[Any]:
     return output_z3
 
 
-# function designed to generate all the binary boolean combination of items from two list in the language of z3
+# function designed to generate all the binary boolean combination
+# of items from two list in the language of z3
 
 
 def binary_comb_prov9(list1: List[Any], list2: List[Any]) -> List[str]:
@@ -64,4 +65,5 @@ def binary_comb_prov9(list1: List[Any], list2: List[Any]) -> List[str]:
     return output_prov9
 
 
-# function designed to generate all the binary boolean combination of items from two list in the language of prover9
+# function designed to generate all the binary boolean
+# combination of items from two list in the language of prover9
