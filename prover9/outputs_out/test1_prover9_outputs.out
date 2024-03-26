@@ -1,0 +1,1287 @@
+============================== Prover9 ===============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 11176 was started by giulianoros on giulianoros-VirtualBox,
+Thu Mar 21 16:11:45 2024
+The command was "prover9/bin/LADR-2009-11A/bin/prover9 -f prover9/conf/default_input.in prover9/inputs_in/test1_input.in".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file prover9/conf/default_input.in
+
+set(ignore_option_dependencies).
+if(Prover9).
+% Conditional input included.
+assign(max_seconds,10).
+set(prolog_style_variables).
+end_if.
+if(Mace4).
+% Conditional input omitted.
+end_if.
+
+formulas(assumptions).
+X ^ Y = Y ^ X # label(L1).
+X v Y = Y v X # label(L2).
+X ^ (Y ^ Z) = (X ^ Y) ^ Z # label(L3).
+X v (Y v Z) = (X v Y) v Z # label(L4).
+X v X = X # label(L5).
+X ^ X = X # label(L6).
+X v (X ^ Y) = X # label(L7).
+X ^ (X v Y) = X # label(L8).
+X v 1 = 1 # label(L9).
+X v 0 = X # label(L10).
+X v (Y ^ Z) = (X v Y) ^ (X v Z) # label(L11).
+X ^ (Y v Z) = (X ^ Y) v (X ^ Z) # label(L12).
+X * X = 1.
+(X * Y) ^ Y = Y.
+X ^ (X * Y) = X ^ Y.
+X * (Y ^ Z) = (X * Y) ^ (X * Z).
+(X v Y) * Z = (X * Z) ^ (Y * Z).
+X ^ 0 = 0.
+X v X' = 1.
+X ^ X' = 0.
+X'' = X.
+X * Y = X' v Y.
+end_of_list.
+
+% Reading from file prover9/inputs_in/test1_input.in
+
+
+============================== end of input ==========================
+
+% Enabling option dependencies (ignore applies only on input).
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+
+============================== end of process non-clausal formulas ===
+
+============================== PROCESS INITIAL CLAUSES ===============
+
+% Clauses before input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+A ^ B = B ^ A # label(L1).  [assumption].
+A v B = B v A # label(L2).  [assumption].
+A ^ (B ^ C) = (A ^ B) ^ C # label(L3).  [assumption].
+A v (B v C) = (A v B) v C # label(L4).  [assumption].
+A v A = A # label(L5).  [assumption].
+A ^ A = A # label(L6).  [assumption].
+A v (A ^ B) = A # label(L7).  [assumption].
+A ^ (A v B) = A # label(L8).  [assumption].
+A v 1 = 1 # label(L9).  [assumption].
+A v 0 = A # label(L10).  [assumption].
+A v (B ^ C) = (A v B) ^ (A v C) # label(L11).  [assumption].
+A ^ (B v C) = (A ^ B) v (A ^ C) # label(L12).  [assumption].
+A * A = 1.  [assumption].
+(A * B) ^ B = B.  [assumption].
+A ^ (A * B) = A ^ B.  [assumption].
+A * (B ^ C) = (A * B) ^ (A * C).  [assumption].
+(A v B) * C = (A * C) ^ (B * C).  [assumption].
+A ^ 0 = 0.  [assumption].
+A v A' = 1.  [assumption].
+A ^ A' = 0.  [assumption].
+A'' = A.  [assumption].
+A * B = A' v B.  [assumption].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== PREDICATE ELIMINATION =================
+
+No predicates eliminated.
+
+============================== end predicate elimination =============
+
+Auto_denials:  (no changes).
+
+Term ordering decisions:
+Predicate symbol precedence:  predicate_order([ = ]).
+Function symbol precedence:  function_order([ 0, 1, ^, v, *, ' ]).
+After inverse_order: Function symbol precedence:  function_order([ 0, 1, ^, v, ', * ]).
+Unfolding symbols: */2.
+
+Auto_inference settings:
+  % set(paramodulation).  % (positive equality literals)
+
+Auto_process settings:  (no changes).
+
+
+% Operation ^ is commutative; C redundancy checks enabled.
+kept:      1 A ^ B = B ^ A # label(L1).  [assumption].
+
+% Operation v is commutative; C redundancy checks enabled.
+kept:      2 A v B = B v A # label(L2).  [assumption].
+           3 A ^ (B ^ C) = (A ^ B) ^ C # label(L3).  [assumption].
+kept:      4 (A ^ B) ^ C = A ^ (B ^ C).  [copy(3),flip(a)].
+           5 A v (B v C) = (A v B) v C # label(L4).  [assumption].
+kept:      6 (A v B) v C = A v (B v C).  [copy(5),flip(a)].
+kept:      7 A v A = A # label(L5).  [assumption].
+kept:      8 A ^ A = A # label(L6).  [assumption].
+kept:      9 A v (A ^ B) = A # label(L7).  [assumption].
+kept:      10 A ^ (A v B) = A # label(L8).  [assumption].
+kept:      11 A v 1 = 1 # label(L9).  [assumption].
+kept:      12 A v 0 = A # label(L10).  [assumption].
+kept:      13 A v (B ^ C) = (A v B) ^ (A v C) # label(L11).  [assumption].
+           14 A ^ (B v C) = (A ^ B) v (A ^ C) # label(L12).  [assumption].
+kept:      15 A ^ ((A ^ B) v C) = A ^ (B v C).  [copy(14),rewrite([13(5),2(4),9(4)]),flip(a)].
+kept:      16 A * A = 1.  [assumption].
+           17 (A * B) ^ B = B.  [assumption].
+kept:      18 A ^ (B * A) = A.  [copy(17),rewrite([1(2)])].
+kept:      19 A ^ (A * B) = A ^ B.  [assumption].
+kept:      20 A * (B ^ C) = (A * B) ^ (A * C).  [assumption].
+kept:      21 (A v B) * C = (A * C) ^ (B * C).  [assumption].
+kept:      22 A ^ 0 = 0.  [assumption].
+kept:      23 A v A' = 1.  [assumption].
+kept:      24 A ^ A' = 0.  [assumption].
+kept:      25 A'' = A.  [assumption].
+kept:      26 A * B = A' v B.  [assumption].
+kept:      27 (A v B)' v C = (A' v C) ^ (B' v C).  [back_rewrite(21),rewrite([26(2),26(4),26(6)])].
+kept:      28 A ^ (A' v B) = A ^ B.  [back_rewrite(19),rewrite([26(1)])].
+kept:      29 A ^ (B' v A) = A.  [back_rewrite(18),rewrite([26(1)])].
+
+============================== end of process initial clauses ========
+
+============================== CLAUSES FOR SEARCH ====================
+
+% Clauses after input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+1 A ^ B = B ^ A # label(L1).  [assumption].
+2 A v B = B v A # label(L2).  [assumption].
+4 (A ^ B) ^ C = A ^ (B ^ C).  [copy(3),flip(a)].
+6 (A v B) v C = A v (B v C).  [copy(5),flip(a)].
+7 A v A = A # label(L5).  [assumption].
+8 A ^ A = A # label(L6).  [assumption].
+10 A ^ (A v B) = A # label(L8).  [assumption].
+11 A v 1 = 1 # label(L9).  [assumption].
+12 A v 0 = A # label(L10).  [assumption].
+13 A v (B ^ C) = (A v B) ^ (A v C) # label(L11).  [assumption].
+15 A ^ ((A ^ B) v C) = A ^ (B v C).  [copy(14),rewrite([13(5),2(4),9(4)]),flip(a)].
+22 A ^ 0 = 0.  [assumption].
+23 A v A' = 1.  [assumption].
+24 A ^ A' = 0.  [assumption].
+25 A'' = A.  [assumption].
+26 A * B = A' v B.  [assumption].
+27 (A v B)' v C = (A' v C) ^ (B' v C).  [back_rewrite(21),rewrite([26(2),26(4),26(6)])].
+28 A ^ (A' v B) = A ^ B.  [back_rewrite(19),rewrite([26(1)])].
+29 A ^ (B' v A) = A.  [back_rewrite(18),rewrite([26(1)])].
+end_of_list.
+
+formulas(demodulators).
+1 A ^ B = B ^ A # label(L1).  [assumption].
+        % (lex-dep)
+2 A v B = B v A # label(L2).  [assumption].
+        % (lex-dep)
+4 (A ^ B) ^ C = A ^ (B ^ C).  [copy(3),flip(a)].
+6 (A v B) v C = A v (B v C).  [copy(5),flip(a)].
+7 A v A = A # label(L5).  [assumption].
+8 A ^ A = A # label(L6).  [assumption].
+10 A ^ (A v B) = A # label(L8).  [assumption].
+11 A v 1 = 1 # label(L9).  [assumption].
+12 A v 0 = A # label(L10).  [assumption].
+13 A v (B ^ C) = (A v B) ^ (A v C) # label(L11).  [assumption].
+15 A ^ ((A ^ B) v C) = A ^ (B v C).  [copy(14),rewrite([13(5),2(4),9(4)]),flip(a)].
+22 A ^ 0 = 0.  [assumption].
+23 A v A' = 1.  [assumption].
+24 A ^ A' = 0.  [assumption].
+25 A'' = A.  [assumption].
+26 A * B = A' v B.  [assumption].
+27 (A v B)' v C = (A' v C) ^ (B' v C).  [back_rewrite(21),rewrite([26(2),26(4),26(6)])].
+28 A ^ (A' v B) = A ^ B.  [back_rewrite(19),rewrite([26(1)])].
+29 A ^ (B' v A) = A.  [back_rewrite(18),rewrite([26(1)])].
+end_of_list.
+
+============================== end of clauses for search =============
+
+============================== SEARCH ================================
+
+% Starting search at 0.00 seconds.
+
+given #1 (I,wt=7): 1 A ^ B = B ^ A # label(L1).  [assumption].
+
+given #2 (I,wt=7): 2 A v B = B v A # label(L2).  [assumption].
+
+given #3 (I,wt=11): 4 (A ^ B) ^ C = A ^ (B ^ C).  [copy(3),flip(a)].
+
+% Operation ^ is associative-commutative; CAC redundancy checks enabled.
+% back CAC tautology: 30 A ^ (B ^ C) = C ^ (A ^ B).  [para(4(a,1),1(a,1))].
+
+given #4 (I,wt=11): 6 (A v B) v C = A v (B v C).  [copy(5),flip(a)].
+
+% Operation v is associative-commutative; CAC redundancy checks enabled.
+% back CAC tautology: 32 A v (B v C) = C v (A v B).  [para(6(a,1),2(a,1))].
+
+given #5 (I,wt=5): 7 A v A = A # label(L5).  [assumption].
+
+given #6 (I,wt=5): 8 A ^ A = A # label(L6).  [assumption].
+
+given #7 (I,wt=7): 10 A ^ (A v B) = A # label(L8).  [assumption].
+
+given #8 (I,wt=5): 11 A v 1 = 1 # label(L9).  [assumption].
+
+given #9 (I,wt=5): 12 A v 0 = A # label(L10).  [assumption].
+
+given #10 (I,wt=13): 13 A v (B ^ C) = (A v B) ^ (A v C) # label(L11).  [assumption].
+
+given #11 (I,wt=13): 15 A ^ ((A ^ B) v C) = A ^ (B v C).  [copy(14),rewrite([13(5),2(4),9(4)]),flip(a)].
+
+given #12 (I,wt=5): 22 A ^ 0 = 0.  [assumption].
+
+given #13 (I,wt=6): 23 A v A' = 1.  [assumption].
+
+given #14 (I,wt=6): 24 A ^ A' = 0.  [assumption].
+
+given #15 (I,wt=5): 25 A'' = A.  [assumption].
+
+given #16 (I,wt=8): 26 A * B = A' v B.  [assumption].
+
+given #17 (I,wt=16): 27 (A v B)' v C = (A' v C) ^ (B' v C).  [back_rewrite(21),rewrite([26(2),26(4),26(6)])].
+
+given #18 (I,wt=10): 28 A ^ (A' v B) = A ^ B.  [back_rewrite(19),rewrite([26(1)])].
+
+given #19 (A,wt=11): 31 A ^ (B ^ C) = B ^ (A ^ C).  [para(1(a,1),4(a,1,1)),rewrite([4(2)])].
+
+given #20 (T,wt=5): 44 1 v A = 1.  [para(11(a,1),2(a,1)),flip(a)].
+
+given #21 (T,wt=5): 45 A ^ 1 = A.  [para(11(a,1),10(a,1,2))].
+
+given #22 (T,wt=5): 46 0 v A = A.  [para(12(a,1),2(a,1)),flip(a)].
+
+given #23 (T,wt=4): 95 0' = 1.  [para(46(a,1),23(a,1))].
+
+given #24 (A,wt=11): 33 A v (B v C) = B v (A v C).  [para(2(a,1),6(a,1,1)),rewrite([6(2)])].
+
+given #25 (T,wt=4): 96 1' = 0.  [para(95(a,1),25(a,1,1))].
+
+given #26 (T,wt=5): 57 0 ^ A = 0.  [para(22(a,1),1(a,1)),flip(a)].
+
+given #27 (T,wt=5): 94 1 ^ A = A.  [para(45(a,1),1(a,1)),flip(a)].
+
+given #28 (T,wt=7): 40 A ^ (B v A) = A.  [para(2(a,1),10(a,1,2))].
+
+given #29 (A,wt=9): 34 A v (A v B) = A v B.  [para(7(a,1),6(a,1,1)),flip(a)].
+
+given #30 (T,wt=8): 58 A v (A' v B) = 1.  [para(23(a,1),6(a,1,1)),rewrite([44(2)]),flip(a)].
+
+given #31 (T,wt=8): 61 A ^ (A' ^ B) = 0.  [para(24(a,1),4(a,1,1)),rewrite([57(2)]),flip(a)].
+
+given #32 (T,wt=8): 84 A v (B v A') = 1.  [back_rewrite(59),rewrite([71(2),13(4),23(4),1(4),49(4)])].
+
+given #33 (T,wt=8): 93 A ^ (B ^ A') = 0.  [para(24(a,1),31(a,1,2)),rewrite([22(2)]),flip(a)].
+
+given #34 (A,wt=9): 36 A v (B v A) = B v A.  [para(7(a,1),6(a,2,2)),rewrite([2(2)])].
+
+given #35 (T,wt=8): 116 A' v (B v A) = 1.  [para(25(a,1),84(a,1,2,2))].
+
+given #36 (T,wt=8): 120 A' ^ (B ^ A) = 0.  [para(25(a,1),93(a,1,2,2))].
+
+given #37 (T,wt=9): 37 A ^ (A ^ B) = A ^ B.  [para(8(a,1),4(a,1,1)),flip(a)].
+
+given #38 (T,wt=9): 39 A ^ (B ^ A) = B ^ A.  [para(8(a,1),4(a,2,2)),rewrite([1(2)])].
+
+given #39 (A,wt=11): 41 A ^ ((A v B) ^ C) = A ^ C.  [para(10(a,1),4(a,1,1)),flip(a)].
+
+given #40 (T,wt=9): 98 A ^ (B v (A v C)) = A.  [para(33(a,1),10(a,1,2))].
+
+given #41 (T,wt=9): 103 A ^ (B v (C v A)) = A.  [para(6(a,1),40(a,1,2))].
+
+given #42 (T,wt=10): 60 A ^ (B v (A ^ B)') = A.  [para(23(a,1),15(a,1,2)),rewrite([45(2)]),flip(a)].
+
+given #43 (T,wt=10): 62 A ^ (B ^ (A ^ B)') = 0.  [para(24(a,1),4(a,1)),flip(a)].
+
+given #44 (A,wt=13): 43 (A v B) ^ (A v (B v C)) = A v B.  [para(6(a,1),10(a,1,2))].
+
+given #45 (T,wt=10): 63 (A v B) ^ (A v B') = A.  [para(24(a,1),13(a,1,2)),rewrite([12(2)]),flip(a)].
+
+given #46 (T,wt=10): 71 (A v B)' = A' ^ B'.  [para(27(a,1),12(a,1)),rewrite([2(3),46(3),2(4),46(4)]),flip(a)].
+
+given #47 (T,wt=10): 85 A ^ (B v A') = A ^ B.  [para(2(a,1),28(a,1,2))].
+
+given #48 (T,wt=10): 97 (A v B) ^ (A' v B) = B.  [back_rewrite(80),rewrite([96(2),46(2)]),flip(a)].
+
+given #49 (A,wt=13): 47 (A ^ B) v C = (C v A) ^ (C v B).  [para(13(a,1),2(a,1)),flip(a)].
+
+given #50 (T,wt=10): 109 A v (B v (A' v C)) = 1.  [para(58(a,1),6(a,1)),rewrite([71(3),81(5),13(7),58(7),1(6),94(6)]),flip(a)].
+
+given #51 (T,wt=10): 113 A ^ (B ^ (A' ^ C)) = 0.  [para(61(a,1),31(a,1,2)),rewrite([22(2)]),flip(a)].
+
+given #52 (T,wt=10): 114 A v (B v (C v A')) = 1.  [para(84(a,1),6(a,1)),rewrite([71(3),13(5),13(7),84(7),1(6),94(6)]),flip(a)].
+
+given #53 (T,wt=10): 118 A ^ (B ^ (C ^ A')) = 0.  [para(4(a,1),93(a,1,2))].
+
+given #54 (A,wt=17): 48 ((A v B) ^ (A v C)) v D = A v ((B ^ C) v D).  [para(13(a,1),6(a,1,1))].
+
+given #55 (T,wt=10): 125 A' v (B v (A v C)) = 1.  [para(116(a,1),6(a,1,1)),rewrite([44(2),6(4)]),flip(a)].
+
+given #56 (T,wt=10): 126 A' v (B v (C v A)) = 1.  [para(6(a,1),116(a,1,2))].
+
+given #57 (T,wt=10): 128 A' ^ (B ^ (A ^ C)) = 0.  [para(120(a,1),4(a,1,1)),rewrite([57(2),4(4)]),flip(a)].
+
+given #58 (T,wt=10): 129 A' ^ (B ^ (C ^ A)) = 0.  [para(4(a,1),120(a,1,2))].
+
+given #59 (A,wt=11): 56 A ^ (B ^ (A v C)) = A ^ B.  [back_rewrite(42),rewrite([50(3)])].
+
+given #60 (T,wt=10): 156 A ^ (B v (B ^ A)') = A.  [para(1(a,1),60(a,1,2,2,1))].
+
+given #61 (T,wt=10): 164 A ^ (B ^ (B ^ A)') = 0.  [para(1(a,1),62(a,1,2,2,1))].
+
+given #62 (T,wt=10): 179 (A v B) ^ (B v A') = B.  [para(2(a,1),63(a,1,1))].
+
+given #63 (T,wt=10): 180 (A v B) ^ (B' v A) = A.  [para(2(a,1),63(a,1,2))].
+
+given #64 (A,wt=14): 86 A ^ ((A' v B) ^ C) = A ^ (B ^ C).  [para(28(a,1),4(a,1,1)),rewrite([4(2)]),flip(a)].
+
+given #65 (T,wt=10): 186 (A' ^ B')' = A v B.  [para(71(a,1),25(a,1,1))].
+
+given #66 (T,wt=10): 328 (A v B') ^ (B v A) = A.  [para(179(a,1),1(a,1)),flip(a)].
+
+given #67 (T,wt=10): 333 (A' v B) ^ (B v A) = B.  [para(25(a,1),179(a,1,2,2))].
+
+given #68 (T,wt=10): 356 (A ^ B')' = A' v B.  [para(25(a,1),186(a,1,1,1))].
+
+given #69 (A,wt=18): 88 (A v B) ^ (A v (B' v C)) = (A v B) ^ (A v C).  [para(28(a,1),13(a,1,2)),rewrite([13(2)]),flip(a)].
+
+given #70 (T,wt=10): 380 (A ^ B)' = A' v B'.  [para(25(a,1),356(a,1,1,2))].
+
+given #71 (T,wt=11): 90 A' ^ (A v B) = A' ^ B.  [para(25(a,1),28(a,1,2,1))].
+
+given #72 (T,wt=11): 101 A ^ ((B v A) ^ C) = A ^ C.  [para(40(a,1),4(a,1,1)),flip(a)].
+
+given #73 (T,wt=11): 105 A ^ (B ^ (C v A)) = B ^ A.  [para(40(a,1),31(a,1,2)),flip(a)].
+
+given #74 (A,wt=14): 89 A ^ (B ^ (A' v C)) = A ^ (B ^ C).  [para(13(a,1),28(a,1,2)),rewrite([86(6)])].
+
+given #75 (T,wt=11): 144 (A v B) ^ (C ^ A) = C ^ A.  [para(39(a,1),41(a,2)),rewrite([137(4)])].
+
+given #76 (T,wt=11): 147 A ^ (B v (C v (A v D))) = A.  [para(6(a,1),98(a,1,2))].
+
+given #77 (T,wt=11): 152 A ^ (B v (C v (D v A))) = A.  [para(6(a,1),103(a,1,2,2))].
+
+given #78 (T,wt=11): 176 (A v B) ^ (B v A) = A v B.  [para(36(a,1),43(a,1,2))].
+
+given #79 (A,wt=14): 100 A ^ (B v (A' v C)) = A ^ (B v C).  [para(33(a,1),28(a,1,2))].
+
+given #80 (T,wt=11): 178 (A v B) ^ (A' ^ B') = 0.  [para(43(a,1),62(a,1,2,2,1)),rewrite([71(5),139(8)])].
+
+given #81 (T,wt=11): 197 A' ^ (B v A) = A' ^ B.  [para(25(a,1),85(a,1,2,2))].
+
+given #82 (T,wt=11): 426 A' ^ B = (A v B) ^ A'.  [para(90(a,1),1(a,1))].
+
+given #83 (T,wt=11): 434 (A v B) ^ (C ^ B) = C ^ B.  [para(39(a,1),101(a,2)),rewrite([137(4)])].
+
+given #84 (A,wt=13): 104 (A v B) ^ (A v (C v B)) = A v B.  [para(40(a,1),13(a,1,2)),flip(a)].
+
+given #85 (T,wt=11): 439 A' ^ B = (B v A) ^ A'.  [para(63(a,1),105(a,1,2))].
+
+given #86 (T,wt=11): 475 (A v B) ^ (B' ^ A') = 0.  [para(1(a,1),178(a,1,2))].
+
+given #87 (T,wt=11): 478 (A v B') ^ (A' ^ B) = 0.  [para(25(a,1),178(a,1,2,2))].
+
+given #88 (T,wt=11): 488 (A v B) ^ A' = B ^ A'.  [para(426(a,1),1(a,1))].
+
+given #89 (A,wt=13): 107 A v (B v (A v C)) = B v (A v C).  [para(34(a,1),6(a,2,2)),rewrite([33(3),6(2)])].
+
+given #90 (T,wt=11): 510 (A v B) ^ B' = A ^ B'.  [para(439(a,1),1(a,1))].
+
+given #91 (T,wt=12): 243 A v (B v (C v (A' v D))) = 1.  [para(109(a,1),6(a,1)),rewrite([71(3),81(5),13(7),13(9),109(9),1(7),94(7)]),flip(a)].
+
+given #92 (T,wt=12): 247 A ^ (B ^ (C ^ (A' ^ D))) = 0.  [para(4(a,1),113(a,1,2))].
+
+given #93 (T,wt=12): 251 A v (B v (C v (D v A'))) = 1.  [para(114(a,1),6(a,1)),rewrite([71(3),13(5),13(7),13(9),114(9),1(7),94(7)]),flip(a)].
+
+given #94 (A,wt=13): 122 A v (B v (C v A)) = B v (C v A).  [para(6(a,1),36(a,1,2)),rewrite([6(5)])].
+
+given #95 (T,wt=12): 255 A ^ (B ^ (C ^ (D ^ A'))) = 0.  [para(4(a,1),118(a,1,2,2))].
+
+given #96 (T,wt=12): 295 A' v (B v (C v (A v D))) = 1.  [para(6(a,1),125(a,1,2,2)),rewrite([71(2),265(7),125(5),94(7)])].
+
+given #97 (T,wt=12): 296 A' v (B v (C v (D v A))) = 1.  [para(6(a,1),126(a,1,2,2))].
+
+given #98 (T,wt=12): 299 A' ^ (B ^ (C ^ (A ^ D))) = 0.  [para(4(a,1),128(a,1,2))].
+
+given #99 (A,wt=14): 130 (A v B') ^ ((A v C) ^ (A v B)) = A.  [para(120(a,1),13(a,1,2)),rewrite([12(2),13(4)]),flip(a)].
+
+given #100 (T,wt=12): 302 A' ^ (B ^ (C ^ (D ^ A))) = 0.  [para(4(a,1),129(a,1,2,2))].
+
+given #101 (T,wt=13): 135 A ^ (B ^ (A ^ C)) = B ^ (A ^ C).  [para(37(a,1),4(a,2,2)),rewrite([31(3),4(2)])].
+
+given #102 (T,wt=13): 137 A ^ (B ^ (C ^ A)) = B ^ (C ^ A).  [para(4(a,1),39(a,1,2)),rewrite([4(5)])].
+
+given #103 (T,wt=13): 142 A ^ ((B v (A v C)) ^ D) = A ^ D.  [para(33(a,1),41(a,1,2,1))].
+
+given #104 (A,wt=17): 139 (A v B) ^ ((A v (B v C)) ^ D) = (A v B) ^ D.  [para(6(a,1),41(a,1,2,1))].
+
+given #105 (T,wt=13): 149 A ^ (B ^ (C v (A v D))) = B ^ A.  [para(98(a,1),31(a,1,2)),flip(a)].
+
+given #106 (T,wt=13): 150 A ^ ((B v (C v A)) ^ D) = A ^ D.  [para(103(a,1),4(a,1,1)),flip(a)].
+
+given #107 (T,wt=13): 154 A ^ (B ^ (C v (D v A))) = B ^ A.  [para(103(a,1),31(a,1,2)),flip(a)].
+
+given #108 (T,wt=13): 170 (A v B) ^ (B v (A v C)) = B v A.  [para(2(a,1),43(a,1,1))].
+
+given #109 (A,wt=15): 141 A ^ (B ^ ((A v C) ^ D)) = B ^ (A ^ D).  [para(41(a,1),31(a,1,2)),flip(a)].
+
+given #110 (T,wt=13): 171 (A v B) ^ (B v (C v A)) = A v B.  [para(2(a,1),43(a,1,2)),rewrite([6(3)])].
+
+given #111 (T,wt=13): 189 (A v B) ^ (C ^ (A' ^ B')) = 0.  [para(71(a,1),93(a,1,2,2))].
+
+given #112 (T,wt=13): 190 A' ^ (B' ^ (C ^ (A v B))) = 0.  [para(71(a,1),120(a,1,1)),rewrite([4(6)])].
+
+given #113 (T,wt=13): 265 (A ^ B) v C = (A v C) ^ (B v C).  [para(7(a,1),48(a,2)),rewrite([2(3),263(3),2(4),264(4),2(4),13(4),36(2),36(3)]),flip(a)].
+
+given #114 (A,wt=15): 146 (A v B) ^ (C v (A v (B v D))) = A v B.  [para(6(a,1),98(a,1,2,2))].
+
+given #115 (T,wt=13): 382 (A' v B) ^ (C ^ (A ^ B')) = 0.  [para(356(a,1),120(a,1,1))].
+
+given #116 (T,wt=13): 421 (A' v B') ^ (C ^ (A ^ B)) = 0.  [para(380(a,1),120(a,1,1))].
+
+given #117 (T,wt=13): 450 (A v (B v C)) ^ (D ^ B) = D ^ B.  [para(33(a,1),144(a,1,1))].
+
+given #118 (T,wt=13): 455 A ^ (B v (C v (D v (A v E)))) = A.  [para(6(a,1),147(a,1,2,2))].
+
+given #119 (A,wt=15): 148 (A v B) ^ (A v (C v (B v D))) = A v B.  [para(98(a,1),13(a,1,2)),flip(a)].
+
+given #120 (T,wt=13): 460 A ^ (B v (C v (D v (E v A)))) = A.  [para(6(a,1),152(a,1,2,2,2))].
+
+given #121 (T,wt=13): 471 (A v (B v C)) ^ (B v A) = B v A.  [para(176(a,1),144(a,1,2)),rewrite([6(2),176(7)])].
+
+given #122 (T,wt=13): 501 (A v (B v C)) ^ (D ^ C) = D ^ C.  [para(6(a,1),434(a,1,1))].
+
+given #123 (T,wt=13): 505 (A v (B v C)) ^ (C v B) = C v B.  [para(176(a,1),434(a,1,2)),rewrite([176(7)])].
+
+given #124 (A,wt=15): 153 (A v B) ^ (A v (C v (D v B))) = A v B.  [para(103(a,1),13(a,1,2)),flip(a)].
+
+given #125 (T,wt=13): 506 (A v B) ^ (C v (B v A)) = A v B.  [para(2(a,1),104(a,1,2)),rewrite([6(3)])].
+
+given #126 (T,wt=13): 525 (A v B) ^ (C ^ (B' ^ A')) = 0.  [para(475(a,1),31(a,1,2)),rewrite([22(2)]),flip(a)].
+
+given #127 (T,wt=13): 532 (A v B') ^ (C ^ (A' ^ B)) = 0.  [para(478(a,1),31(a,1,2)),rewrite([22(2)]),flip(a)].
+
+given #128 (T,wt=13): 693 (A v (B v C)) ^ (C v A) = C v A.  [para(171(a,1),1(a,1)),flip(a)].
+
+given #129 (A,wt=15): 155 (A v B) ^ (C v (A v (D v B))) = A v B.  [para(33(a,1),103(a,1,2,2))].
+
+given #130 (T,wt=13): 756 (A' v B) ^ (C ^ (B' ^ A)) = 0.  [para(1(a,1),382(a,1,2,2))].
+
+given #131 (T,wt=13): 757 (A v B') ^ (C ^ (B ^ A')) = 0.  [para(2(a,1),382(a,1,1))].
+
+given #132 (T,wt=13): 768 (A' v B') ^ (C ^ (B ^ A)) = 0.  [para(1(a,1),421(a,1,2,2))].
+
+given #133 (T,wt=14): 181 (A v B) ^ ((A v B') ^ C) = A ^ C.  [para(63(a,1),4(a,1,1)),flip(a)].
+
+given #134 (A,wt=19): 172 (A v (B v C)) ^ (A v (B v (C v D))) = A v (B v C).  [para(6(a,1),43(a,1,1)),rewrite([6(5),6(8)])].
+
+given #135 (T,wt=14): 183 (A v B) ^ (C ^ (A v B')) = C ^ A.  [para(63(a,1),31(a,1,2)),flip(a)].
+
+given #136 (T,wt=14): 193 A ^ ((B v A') ^ C) = A ^ (B ^ C).  [para(85(a,1),4(a,1,1)),rewrite([4(2)]),flip(a)].
+
+given #137 (T,wt=14): 195 A ^ (B v (C v A')) = A ^ (B v C).  [para(6(a,1),85(a,1,2))].
+
+given #138 (T,wt=14): 198 A ^ (B ^ (C v A')) = B ^ (A ^ C).  [para(85(a,1),31(a,1,2)),flip(a)].
+
+given #139 (A,wt=17): 174 (A v B) ^ (C ^ (A v (B v D))) = C ^ (A v B).  [para(43(a,1),31(a,1,2)),flip(a)].
+
+given #140 (T,wt=14): 200 (A v B) ^ ((A' v B) ^ C) = B ^ C.  [para(97(a,1),4(a,1,1)),flip(a)].
+
+given #141 (T,wt=14): 205 (A v B) ^ (C ^ (A' v B)) = C ^ B.  [para(97(a,1),31(a,1,2)),flip(a)].
+
+given #142 (T,wt=14): 329 (A v B) ^ ((B v A') ^ C) = B ^ C.  [para(179(a,1),4(a,1,1)),flip(a)].
+
+given #143 (T,wt=14): 334 (A v B) ^ (C ^ (B v A')) = C ^ B.  [para(179(a,1),31(a,1,2)),flip(a)].
+
+given #144 (A,wt=19): 175 (A v (B v C)) ^ (B v (A v (C v D))) = B v (A v C).  [para(33(a,1),43(a,1,1)),rewrite([6(4)])].
+
+given #145 (T,wt=14): 336 (A v B) ^ ((B' v A) ^ C) = A ^ C.  [para(180(a,1),4(a,1,1)),flip(a)].
+
+given #146 (T,wt=14): 339 (A v B) ^ (C ^ (B' v A)) = C ^ A.  [para(180(a,1),31(a,1,2)),flip(a)].
+
+given #147 (T,wt=14): 367 (A v B') ^ ((B v A) ^ C) = A ^ C.  [para(328(a,1),4(a,1,1)),flip(a)].
+
+given #148 (T,wt=14): 371 (A v B') ^ (C ^ (B v A)) = C ^ A.  [para(328(a,1),31(a,1,2)),flip(a)].
+
+given #149 (A,wt=16): 182 (A v (B v C)) ^ (A v (B v C')) = A v B.  [para(6(a,1),63(a,1,1)),rewrite([6(5)])].
+
+given #150 (T,wt=14): 372 (A' v B) ^ ((B v A) ^ C) = B ^ C.  [para(333(a,1),4(a,1,1)),flip(a)].
+
+given #151 (T,wt=14): 377 (A' v B) ^ (C ^ (B v A)) = C ^ B.  [para(333(a,1),31(a,1,2)),flip(a)].
+
+given #152 (T,wt=14): 553 A v (B v (C v (D v (A' v E)))) = 1.  [para(243(a,1),6(a,1)),rewrite([71(3),265(5),13(7),13(9),13(11),243(11),1(8),94(8)]),flip(a)].
+
+given #153 (T,wt=14): 556 A ^ (B ^ (C ^ (D ^ (A' ^ E)))) = 0.  [para(4(a,1),247(a,1,2,2))].
+
+given #154 (A,wt=17): 184 (A v (B v C)) ^ ((B v A') ^ (B v C')) = B.  [para(33(a,1),63(a,1,1)),rewrite([71(4),13(6)])].
+
+given #155 (T,wt=14): 559 A v (B v (C v (D v (E v A')))) = 1.  [para(251(a,1),6(a,1)),rewrite([71(3),13(5),13(7),13(9),13(11),251(11),1(8),94(8)]),flip(a)].
+
+given #156 (T,wt=14): 566 A ^ (B ^ (C ^ (D ^ (E ^ A')))) = 0.  [para(4(a,1),255(a,1,2,2,2))].
+
+given #157 (T,wt=14): 569 A' v (B v (C v (D v (A v E)))) = 1.  [para(6(a,1),295(a,1,2,2,2)),rewrite([71(2),265(8),295(6),94(8)])].
+
+given #158 (T,wt=14): 570 A' v (B v (C v (D v (E v A)))) = 1.  [para(122(a,1),295(a,1,2,2,2))].
+
+given #159 (A,wt=19): 187 (A v B) ^ ((A' v C) ^ (B' v C)) = (A v B) ^ C.  [para(71(a,1),28(a,1,2,1)),rewrite([81(5)])].
+
+given #160 (T,wt=14): 572 A' ^ (B ^ (C ^ (D ^ (A ^ E)))) = 0.  [para(4(a,1),299(a,1,2,2))].
+
+given #161 (T,wt=14): 588 A' ^ (B ^ (C ^ (D ^ (E ^ A)))) = 0.  [para(4(a,1),302(a,1,2,2,2))].
+
+given #162 (T,wt=14): 608 (A' v B) ^ (C ^ A) = B ^ (C ^ A).  [para(137(a,1),86(a,1)),rewrite([137(7)])].
+
+given #163 (T,wt=14): 920 (A v B') ^ (C ^ (A v B)) = A ^ C.  [para(181(a,1),137(a,1)),rewrite([56(3)]),flip(a)].
+
+given #164 (A,wt=17): 191 (A v (B v C)) ^ ((A v B') ^ (A v C')) = A.  [para(71(a,1),63(a,1,2,2)),rewrite([13(6)])].
+
+given #165 (T,wt=14): 963 (A v B') ^ (C ^ B) = A ^ (C ^ B).  [para(193(a,1),137(a,1)),rewrite([137(3)]),flip(a)].
+
+given #166 (T,wt=14): 1017 (A' v B) ^ (C ^ (A v B)) = B ^ C.  [para(200(a,1),56(a,2)),rewrite([6(6),4(7),1000(8)])].
+
+given #167 (T,wt=15): 250 (A v B) ^ (C ^ (A' ^ (B' ^ D))) = 0.  [para(71(a,1),113(a,1,2,2,1)),rewrite([4(5)])].
+
+given #168 (T,wt=15): 258 (A v B) ^ (C ^ (D ^ (A' ^ B'))) = 0.  [para(71(a,1),118(a,1,2,2,2))].
+
+given #169 (A,wt=18): 196 (A v B) ^ (A v (C v B')) = (A v B) ^ (A v C).  [para(85(a,1),13(a,1,2)),rewrite([13(2)]),flip(a)].
+
+given #170 (T,wt=15): 301 A' ^ (B' ^ (C ^ ((A v B) ^ D))) = 0.  [para(71(a,1),128(a,1,1)),rewrite([4(7)])].
+
+given #171 (T,wt=15): 307 A' ^ (B' ^ (C ^ (D ^ (A v B)))) = 0.  [para(71(a,1),129(a,1,1)),rewrite([4(7)])].
+
+given #172 (T,wt=15): 309 A ^ (B ^ (C ^ (A v D))) = A ^ (B ^ C).  [para(4(a,1),56(a,1,2))].
+
+given #173 (T,wt=15): 346 A' ^ ((A v B) ^ C) = A' ^ (B ^ C).  [para(25(a,1),86(a,1,2,1,1))].
+
+given #174 (A,wt=19): 199 (A v B) ^ ((C v A') ^ (C v B')) = (A v B) ^ C.  [para(71(a,1),85(a,1,2,2)),rewrite([13(5)])].
+
+given #175 (T,wt=15): 386 A ^ (B' ^ (C ^ ((A' v B) ^ D))) = 0.  [para(356(a,1),113(a,1,2,2,1)),rewrite([4(7)])].
+
+given #176 (T,wt=15): 387 A ^ (B' ^ (C ^ (D ^ (A' v B)))) = 0.  [para(356(a,1),118(a,1,2,2,2)),rewrite([4(7)])].
+
+given #177 (T,wt=15): 389 (A' v B) ^ (C ^ (D ^ (A ^ B'))) = 0.  [para(356(a,1),129(a,1,1))].
+
+given #178 (T,wt=15): 423 (A' v B') ^ (C ^ (D ^ (A ^ B))) = 0.  [para(380(a,1),129(a,1,1))].
+
+given #179 (A,wt=17): 201 (A v (B v C)) ^ ((A' v C) ^ (B' v C)) = C.  [para(6(a,1),97(a,1,1)),rewrite([71(4),81(6)])].
+
+given #180 (T,wt=15): 427 A' ^ (B ^ (A v C)) = A' ^ (B ^ C).  [para(13(a,1),90(a,1,2)),rewrite([346(5)])].
+
+given #181 (T,wt=15): 428 A' ^ (B v (A v C)) = A' ^ (B v C).  [para(33(a,1),90(a,1,2))].
+
+given #182 (T,wt=15): 432 A ^ (B ^ ((C v A) ^ D)) = B ^ (A ^ D).  [para(101(a,1),31(a,1,2)),flip(a)].
+
+given #183 (T,wt=15): 436 A ^ (B ^ (C ^ (D v A))) = B ^ (C ^ A).  [para(4(a,1),105(a,1,2)),rewrite([4(6)])].
+
+given #184 (A,wt=16): 202 (A v (B v C)) ^ (A v (B' v C)) = A v C.  [para(97(a,1),13(a,1,2)),flip(a)].
+
+given #185 (T,wt=15): 447 (A v B) ^ (C ^ (A ^ D)) = C ^ (A ^ D).  [para(144(a,1),4(a,1,1)),rewrite([4(2),4(5)]),flip(a)].
+
+given #186 (T,wt=15): 448 (A v B) ^ (C ^ (D ^ A)) = C ^ (D ^ A).  [para(4(a,1),144(a,1,2)),rewrite([4(6)])].
+
+given #187 (T,wt=15): 452 A ^ ((B v (C v (A v D))) ^ E) = A ^ E.  [para(147(a,1),4(a,1,1)),flip(a)].
+
+given #188 (T,wt=15): 457 A ^ (B ^ (C v (D v (A v E)))) = B ^ A.  [para(147(a,1),31(a,1,2)),flip(a)].
+
+given #189 (A,wt=18): 204 (A v B) ^ (A' v (B v C)) = (A v B) ^ (B v C).  [para(97(a,1),15(a,1,2,1)),rewrite([6(7)]),flip(a)].
+
+given #190 (T,wt=15): 458 A ^ ((B v (C v (D v A))) ^ E) = A ^ E.  [para(152(a,1),4(a,1,1)),flip(a)].
+
+given #191 (T,wt=15): 462 A ^ (B ^ (C v (D v (E v A)))) = B ^ A.  [para(152(a,1),31(a,1,2)),flip(a)].
+
+given #192 (T,wt=15): 464 (A v B) ^ ((B v A) ^ C) = (A v B) ^ C.  [para(176(a,1),4(a,1,1)),flip(a)].
+
+given #193 (T,wt=15): 481 A' ^ ((B v A) ^ C) = A' ^ (B ^ C).  [para(197(a,1),4(a,1,1)),rewrite([4(3)]),flip(a)].
+
+given #194 (A,wt=16): 206 (A v (B v C)) ^ (B' v (A v C)) = A v C.  [para(33(a,1),97(a,1,1))].
+
+given #195 (T,wt=15): 482 A' ^ (B v (C v A)) = A' ^ (B v C).  [para(6(a,1),197(a,1,2))].
+
+given #196 (T,wt=15): 499 (A v B) ^ (C ^ (B ^ D)) = C ^ (B ^ D).  [para(434(a,1),4(a,1,1)),rewrite([4(2),4(5)]),flip(a)].
+
+given #197 (T,wt=15): 500 (A v B) ^ (C ^ (D ^ B)) = C ^ (D ^ B).  [para(4(a,1),434(a,1,2)),rewrite([4(6)])].
+
+given #198 (T,wt=15): 536 (A v B) ^ (A' ^ C) = B ^ (A' ^ C).  [para(488(a,1),4(a,1,1)),rewrite([4(3)]),flip(a)].
+
+given #199 (A,wt=16): 207 (A v (B v C)) ^ (B v (A' v C)) = B v C.  [para(33(a,1),97(a,1,2))].
+
+given #200 (T,wt=15): 537 (A v B) ^ (C ^ A') = B ^ (C ^ A').  [para(4(a,1),488(a,2)),rewrite([13(2),4(5),488(4)])].
+
+given #201 (T,wt=15): 539 (A v (B v C)) ^ B' = (A v C) ^ B'.  [para(33(a,1),488(a,1,1))].
+
+given #202 (T,wt=15): 547 (A v B) ^ (B' ^ C) = A ^ (B' ^ C).  [para(510(a,1),4(a,1,1)),rewrite([4(3)]),flip(a)].
+
+given #203 (T,wt=15): 548 (A v B) ^ (C ^ B') = A ^ (C ^ B').  [para(4(a,1),510(a,2)),rewrite([265(2),4(5),510(4)])].
+
+given #204 (A,wt=27): 288 (A v B) ^ ((C v B) ^ ((B v (D v A)) ^ (B v (D v C)))) = (A v B) ^ (C v B).  [back_rewrite(236),rewrite([265(2),4(9),265(11)])].
+
+given #205 (T,wt=15): 549 (A v (B v C)) ^ C' = (A v B) ^ C'.  [para(6(a,1),510(a,1,1))].
+
+given #206 (T,wt=15): 612 (A v (B v (C v D))) ^ (E ^ C) = E ^ C.  [para(147(a,1),137(a,1,2,2)),rewrite([147(9)])].
+
+given #207 (T,wt=15): 613 (A v (B v (C v D))) ^ (E ^ D) = E ^ D.  [para(152(a,1),137(a,1,2,2)),rewrite([152(9)])].
+
+given #208 (T,wt=15): 614 (A v B) ^ (C ^ (B v A)) = C ^ (B v A).  [para(176(a,1),137(a,1,2,2)),rewrite([176(7)])].
+
+given #209 (A,wt=17): 330 (A v (B v C)) ^ ((C v A') ^ (C v B')) = C.  [para(6(a,1),179(a,1,1)),rewrite([71(4),13(6)])].
+
+given #210 (T,wt=15): 622 A ^ (B v (C v (D v (E v (A v F))))) = A.  [para(152(a,1),142(a,1,2)),rewrite([98(3)]),flip(a)].
+
+given #211 (T,wt=15): 623 (A v (B v (C v D))) ^ (C v B) = B v C.  [para(176(a,1),142(a,2)),rewrite([6(3),614(7)])].
+
+given #212 (T,wt=15): 659 A ^ (B v (C v (D v (E v (F v A))))) = A.  [para(152(a,1),150(a,1,2)),rewrite([103(3)]),flip(a)].
+
+given #213 (T,wt=15): 680 (A v B) ^ (B v (C v (A v D))) = B v A.  [para(33(a,1),170(a,1,2,2))].
+
+given #214 (A,wt=16): 331 (A v (B v C)) ^ (B v (C v A')) = B v C.  [para(6(a,1),179(a,1,2))].
+
+given #215 (T,wt=15): 681 (A v B) ^ (B v (C v (D v A))) = B v A.  [para(122(a,1),170(a,1,2,2))].
+
+given #216 (T,wt=15): 700 (A v (B v (C v D))) ^ (C v A) = C v A.  [para(171(a,1),144(a,1,2)),rewrite([6(3),6(2),171(9)])].
+
+given #217 (T,wt=15): 701 (A v (B v (C v D))) ^ (D v B) = D v B.  [para(171(a,1),434(a,1,2)),rewrite([171(9)])].
+
+given #218 (T,wt=15): 733 A' ^ (B ^ (C v A)) = A' ^ (B ^ C).  [para(265(a,1),197(a,1,2)),rewrite([481(5)])].
+
+given #219 (A,wt=16): 332 (A v (B v C)) ^ (A v (C v B')) = A v C.  [para(179(a,1),13(a,1,2)),flip(a)].
+
+given #220 (T,wt=15): 748 (A v B) ^ (C v (B v (A v D))) = B v A.  [para(2(a,1),146(a,1,1))].
+
+given #221 (T,wt=15): 749 (A v B) ^ (C v (B v (D v A))) = A v B.  [para(2(a,1),146(a,1,2,2)),rewrite([6(3)])].
+
+given #222 (T,wt=15): 804 (A v (B v (C v D))) ^ (D v A) = D v A.  [para(122(a,1),471(a,1,1,2))].
+
+given #223 (T,wt=15): 812 (A v (B v (C v D))) ^ (D v C) = D v C.  [para(176(a,1),501(a,1,2)),rewrite([176(8)])].
+
+given #224 (A,wt=16): 337 (A v (B v C)) ^ (C' v (A v B)) = A v B.  [para(6(a,1),180(a,1,1))].
+
+given #225 (T,wt=15): 826 (A v B) ^ (C v (D v (B v A))) = A v B.  [para(2(a,1),153(a,1,2)),rewrite([6(4),6(3)])].
+
+given #226 (T,wt=15): 849 (A v B) ^ (C ^ (D ^ (B' ^ A'))) = 0.  [para(4(a,1),525(a,1,2))].
+
+given #227 (T,wt=15): 860 (A v B') ^ (C ^ (D ^ (A' ^ B))) = 0.  [para(4(a,1),532(a,1,2))].
+
+given #228 (T,wt=15): 880 (A' v B) ^ (C ^ (D ^ (B' ^ A))) = 0.  [para(4(a,1),756(a,1,2))].
+
+given #229 (A,wt=16): 338 (A v (B v C)) ^ (A v (C' v B)) = A v B.  [para(180(a,1),13(a,1,2)),flip(a)].
+
+given #230 (T,wt=15): 894 (A v B') ^ (C ^ (D ^ (B ^ A'))) = 0.  [para(4(a,1),757(a,1,2))].
+
+given #231 (T,wt=15): 903 (A' v B') ^ (C ^ (D ^ (B ^ A))) = 0.  [para(4(a,1),768(a,1,2))].
+
+given #232 (T,wt=16): 368 (A v (B v C')) ^ (C v (A v B)) = A v B.  [para(6(a,1),328(a,1,1))].
+
+given #233 (T,wt=16): 369 (A v (B v C')) ^ (A v (C v B)) = A v B.  [para(328(a,1),13(a,1,2)),flip(a)].
+
+given #234 (A,wt=17): 340 (A v (B v C)) ^ ((A' v B) ^ (C' v B)) = B.  [para(33(a,1),180(a,1,1)),rewrite([71(4),265(6)])].
+
+given #235 (T,wt=16): 373 (A' v (B v C)) ^ (B v (C v A)) = B v C.  [para(6(a,1),333(a,1,2))].
+
+given #236 (T,wt=16): 374 (A v (B' v C)) ^ (A v (C v B)) = A v C.  [para(333(a,1),13(a,1,2)),flip(a)].
+
+given #237 (T,wt=16): 726 (A v (B' v C)) ^ (B v (A v C)) = A v C.  [para(328(a,1),265(a,1,1)),rewrite([6(4),6(6)]),flip(a)].
+
+given #238 (T,wt=16): 727 (A' v (B v C)) ^ (B v (A v C)) = B v C.  [para(333(a,1),265(a,1,1)),rewrite([6(4),6(6)]),flip(a)].
+
+given #239 (A,wt=17): 341 (A v (B v C)) ^ ((B' v A) ^ (C' v A)) = A.  [para(71(a,1),180(a,1,2,1)),rewrite([265(6)])].
+
+given #240 (T,wt=16): 787 A v (B v (C v (D v (E v (A' v F))))) = 1.  [para(251(a,1),148(a,1,1)),rewrite([6(6),6(5),6(4),94(9),251(12)])].
+
+given #241 (T,wt=16): 789 A' v (B v (C v (D v (E v (A v F))))) = 1.  [para(296(a,1),148(a,1,1)),rewrite([6(6),6(5),6(4),94(9),296(12)])].
+
+given #242 (T,wt=16): 802 (A v (B v C)) ^ (B v (A v C')) = B v A.  [para(471(a,1),28(a,2)),rewrite([71(5),71(5),33(9),2(8),13(8),23(4),13(7),94(9),13(8),84(5),94(7)])].
+
+given #243 (T,wt=16): 821 (A v (B v C)) ^ (C v (B v A')) = C v B.  [para(505(a,1),28(a,2)),rewrite([71(5),71(5),33(9),2(8),13(8),13(8),23(6),94(8),13(8),84(8),1(7),94(7)])].
+
+given #244 (A,wt=18): 344 A ^ (B ^ ((A' v C) ^ D)) = A ^ (B ^ (C ^ D)).  [para(4(a,1),86(a,2,2)),rewrite([13(3),4(6),86(7)])].
+
+given #245 (T,wt=16): 830 A v (B v (C v (D v (E v (F v A'))))) = 1.  [para(251(a,1),153(a,1,1)),rewrite([94(9),251(12)])].
+
+given #246 (T,wt=16): 831 A' v (B v (C v (D v (E v (F v A))))) = 1.  [para(296(a,1),153(a,1,1)),rewrite([94(9),296(12)])].
+
+given #247 (T,wt=16): 873 (A v (B v C)) ^ (C v (A v B')) = C v A.  [para(693(a,1),28(a,2)),rewrite([71(5),71(5),33(9),2(8),13(8),23(4),13(7),94(9),13(8),84(8),1(7),94(7)])].
+
+given #248 (T,wt=16): 1225 (A v (B v C)) ^ (B v (C' v A)) = A v B.  [para(2(a,1),182(a,1,2)),rewrite([6(5)])].
+
+given #249 (A,wt=18): 347 A ^ ((B v (A' v C)) ^ D) = A ^ ((B v C) ^ D).  [para(33(a,1),86(a,1,2,1))].
+
+given #250 (T,wt=16): 1318 A ^ (B ^ (C ^ (D ^ (E ^ (A' ^ F))))) = 0.  [para(4(a,1),556(a,1,2,2,2))].
+
+given #251 (T,wt=16): 1321 A ^ (B ^ (C ^ (D ^ (E ^ (F ^ A'))))) = 0.  [para(137(a,1),556(a,1,2,2,2,2))].
+
+given #252 (T,wt=16): 1400 (A v (B v C)) ^ (A' v (C v B)) = C v B.  [para(505(a,1),187(a,2)),rewrite([71(7),33(10),2(9),13(9),23(7),94(9),84(8),1(7),94(7)])].
+
+given #253 (T,wt=16): 1401 (A v (B v C)) ^ (C v (B' v A)) = C v A.  [para(693(a,1),187(a,2)),rewrite([116(5),71(5),33(8),265(7),13(9),58(9),1(8),94(8),94(7)])].
+
+given #254 (A,wt=23): 350 (A v B) ^ ((A' v C) ^ ((B' v C) ^ D)) = (A v B) ^ (C ^ D).  [para(71(a,1),86(a,1,2,1,1)),rewrite([265(5),4(7)])].
+
+given #255 (T,wt=16): 1418 A' ^ (B ^ (C ^ (D ^ (E ^ (A ^ F))))) = 0.  [para(4(a,1),572(a,1,2,2,2))].
+
+given #256 (T,wt=16): 1423 A' ^ (B ^ (C ^ (D ^ (E ^ (F ^ A))))) = 0.  [para(137(a,1),572(a,1,2,2,2,2))].
+
+given #257 (T,wt=16): 1953 (A v (B v C)) ^ (C v (A' v B)) = C v B.  [para(2(a,1),202(a,1,1)),rewrite([6(2)])].
+
+given #258 (T,wt=16): 1954 (A v (B v C)) ^ (B' v (C v A)) = A v C.  [para(2(a,1),202(a,1,2)),rewrite([6(5)])].
+
+given #259 (A,wt=17): 392 (A v (B' v C)) ^ ((B v A) ^ (C' v A)) = A.  [para(356(a,1),328(a,1,1,2)),rewrite([265(6)])].
+
+given #260 (T,wt=16): 2744 (A v (B v C)) ^ (C' v (B v A)) = A v B.  [para(2(a,1),337(a,1,2,2))].
+
+given #261 (T,wt=16): 2891 (A v (B' v C)) ^ (B v (C v A)) = C v A.  [para(2(a,1),368(a,1,1)),rewrite([6(3)])].
+
+given #262 (T,wt=16): 2892 (A v (B v C')) ^ (C v (B v A)) = A v B.  [para(2(a,1),368(a,1,2,2))].
+
+given #263 (T,wt=16): 2915 (A v (B' v C)) ^ (C v (B v A)) = C v A.  [para(2(a,1),369(a,1,1)),rewrite([6(3)])].
+
+given #264 (A,wt=17): 393 (A' v (B v C)) ^ ((C v A) ^ (C v B')) = C.  [para(356(a,1),333(a,1,1,1)),rewrite([6(3),13(6)])].
+
+given #265 (T,wt=16): 2918 (A v (B v C')) ^ (B v (C v A)) = B v A.  [para(33(a,1),369(a,1,1))].
+
+given #266 (T,wt=16): 2966 (A' v (B v C)) ^ (C v (B v A)) = C v B.  [para(2(a,1),373(a,1,1,2))].
+
+given #267 (T,wt=16): 2967 (A' v (B v C)) ^ (C v (A v B)) = B v C.  [para(2(a,1),373(a,1,2)),rewrite([6(5)])].
+
+given #268 (T,wt=16): 2974 (A v (B' v C)) ^ (C v (A v B)) = A v C.  [para(107(a,1),373(a,1,2)),rewrite([71(2),33(5),265(4),13(6),58(3),94(5)])].
+
+given #269 (A,wt=17): 394 (A' v (B' v C)) ^ ((C v A) ^ (C v B)) = C.  [back_rewrite(376),rewrite([380(2),6(4)])].
+
+given #270 (T,wt=16): 3016 (A' v (B v C)) ^ (A v (C v B)) = C v B.  [para(2(a,1),726(a,1,1)),rewrite([6(3)])].
+
+given #271 (T,wt=16): 3115 (A v (B v C')) ^ (B v (A v C)) = A v B.  [para(802(a,1),1(a,1)),flip(a)].
+
+given #272 (T,wt=17): 425 (A v (B' v C')) ^ ((B v A) ^ (C v A)) = A.  [para(380(a,1),328(a,1,1,2)),rewrite([265(6)])].
+
+given #273 (T,wt=17): 433 (A v B) ^ ((A v (C v B)) ^ D) = (A v B) ^ D.  [para(33(a,1),101(a,1,2,1))].
+
+given #274 (A,wt=26): 400 (A v (B v C)) ^ ((A v (D v C)) ^ ((A' v C) ^ (B' v (D' v C)))) = C.  [back_rewrite(281),rewrite([380(8),6(10)])].
+
+given #275 (T,wt=17): 438 (A v B) ^ (C ^ (A v (D v B))) = C ^ (A v B).  [para(33(a,1),105(a,1,2,2))].
+
+given #276 (T,wt=17): 449 (A v (B v C)) ^ (D ^ (A v B)) = D ^ (A v B).  [para(6(a,1),144(a,1,1))].
+
+given #277 (T,wt=17): 454 (A v B) ^ (C v (D v (A v (B v E)))) = A v B.  [para(6(a,1),147(a,1,2,2,2))].
+
+given #278 (T,wt=17): 456 (A v B) ^ (A v (C v (D v (B v E)))) = A v B.  [para(147(a,1),13(a,1,2)),flip(a)].
+
+given #279 (A,wt=18): 405 (A v B) ^ (B v (A' v C)) = (B v A) ^ (B v C).  [para(2(a,1),88(a,1,1))].
+
+given #280 (T,wt=17): 461 (A v B) ^ (A v (C v (D v (E v B)))) = A v B.  [para(152(a,1),13(a,1,2)),flip(a)].
+
+given #281 (T,wt=17): 463 (A v B) ^ (C v (D v (A v (E v B)))) = A v B.  [para(33(a,1),152(a,1,2,2,2))].
+
+given #282 (T,wt=17): 465 (A v (B v C)) ^ (C v (A v B)) = A v (B v C).  [para(6(a,1),176(a,1,1)),rewrite([6(7)])].
+
+given #283 (T,wt=17): 466 (A v (B v C)) ^ (B v (C v A)) = A v (B v C).  [para(6(a,1),176(a,1,2))].
+
+given #284 (A,wt=22): 407 (A v B) ^ ((A v (B' v C)) ^ D) = (A v B) ^ ((A v C) ^ D).  [para(88(a,1),4(a,1,1)),rewrite([4(4)]),flip(a)].
+
+given #285 (T,wt=17): 467 (A v (B v C)) ^ (A v (C v B)) = A v (B v C).  [para(176(a,1),13(a,1,2)),flip(a)].
+
+given #286 (T,wt=17): 503 (A v (B v C)) ^ (D ^ (A v C)) = D ^ (A v C).  [para(33(a,1),434(a,1,1))].
+
+given #287 (T,wt=17): 543 A v (B v (C v (A v D))) = B v (C v (A v D)).  [para(6(a,1),107(a,1,2)),rewrite([6(7)])].
+
+given #288 (T,wt=17): 544 (A v B') ^ ((A v C') ^ (B v (A v C))) = A.  [para(107(a,1),333(a,1,2)),rewrite([71(3),71(3),2(6),13(6),13(6),23(4),94(6),4(8)])].
+
+given #289 (A,wt=26): 408 (A v (B v C)) ^ (A v (B v (C' v D))) = (A v (B v C)) ^ (A v (B v D)).  [para(6(a,1),88(a,1,1)),rewrite([6(6),6(9),6(11)])].
+
+given #290 (T,wt=17): 555 A ^ (B ^ (C ^ (D ^ ((A' v B') ^ E)))) = 0.  [para(247(a,1),4(a,1)),rewrite([380(3)]),flip(a)].
+
+given #291 (T,wt=17): 558 (A v B) ^ (C ^ (D ^ (A' ^ (B' ^ E)))) = 0.  [para(71(a,1),247(a,1,2,2,2,1)),rewrite([4(5)])].
+
+given #292 (T,wt=17): 561 A v (B v (C v (D v A))) = B v (C v (D v A)).  [para(251(a,1),97(a,1,2)),rewrite([25(2),1(6),94(6),25(6)])].
+
+given #293 (T,wt=17): 565 A ^ (B ^ (C ^ (D ^ (E ^ (A' v B'))))) = 0.  [para(255(a,1),4(a,1)),rewrite([380(3)]),flip(a)].
+
+given #294 (A,wt=19): 411 (A v B') ^ (A v (B v C)) = (A v B') ^ (A v C).  [para(25(a,1),88(a,1,2,2,1))].
+
+given #295 (T,wt=17): 568 (A v B) ^ (C ^ (D ^ (E ^ (A' ^ B')))) = 0.  [para(71(a,1),255(a,1,2,2,2,2))].
+
+given #296 (T,wt=17): 571 (A' v B') ^ (C ^ (D ^ (A ^ (B ^ E)))) = 0.  [para(4(a,1),299(a,1,2,2,2)),rewrite([380(2)])].
+
+given #297 (T,wt=17): 574 A' ^ (B' ^ (C ^ (D ^ ((A v B) ^ E)))) = 0.  [para(71(a,1),299(a,1,1)),rewrite([4(8)])].
+
+given #298 (T,wt=17): 590 (A' v B') ^ (C ^ (D ^ (A ^ (E ^ B)))) = 0.  [para(31(a,1),302(a,1,2,2,2)),rewrite([380(2)])].
+
+given #299 (A,wt=22): 412 (A v B) ^ (C ^ (A v (B' v D))) = C ^ ((A v B) ^ (A v D)).  [para(88(a,1),31(a,1,2)),flip(a)].
+
+given #300 (T,wt=17): 593 A' ^ (B' ^ (C ^ (D ^ (E ^ (A v B))))) = 0.  [para(71(a,1),302(a,1,1)),rewrite([4(8)])].
+
+given #301 (T,wt=17): 597 (A' v B') ^ (C ^ (D ^ (E ^ (A ^ B)))) = 0.  [para(380(a,1),302(a,1,1))].
+
+given #302 (T,wt=17): 603 A ^ (B ^ (C ^ (A ^ D))) = B ^ (C ^ (A ^ D)).  [para(4(a,1),135(a,1,2)),rewrite([4(7)])].
+
+given #303 (T,wt=17): 607 A ^ (B ^ (C ^ (D ^ A))) = B ^ (C ^ (D ^ A)).  [para(4(a,1),137(a,1,2,2)),rewrite([4(6)])].
+
+given #304 (A,wt=22): 414 (A v B) ^ (A v (C v (B' v D))) = (A v B) ^ (A v (C v D)).  [para(33(a,1),88(a,1,2,2))].
+
+given #305 (T,wt=17): 619 A ^ (B ^ ((C v (A v D)) ^ E)) = B ^ (A ^ E).  [para(142(a,1),31(a,1,2)),flip(a)].
+
+given #306 (T,wt=17): 626 (A v (B v C)) ^ (D ^ (B ^ E)) = D ^ (B ^ E).  [para(135(a,1),142(a,2)),rewrite([603(6)])].
+
+given #307 (T,wt=17): 627 (A v (B v C)) ^ (D ^ (E ^ B)) = D ^ (E ^ B).  [para(137(a,1),142(a,2)),rewrite([607(6)])].
+
+given #308 (T,wt=17): 628 (A v B) ^ ((B v (A v C)) ^ D) = (B v A) ^ D.  [para(2(a,1),139(a,1,1))].
+
+given #309 (A,wt=18): 415 (A v B) ^ (B' v (A v C)) = (A v B) ^ (A v C).  [para(33(a,1),88(a,1,2))].
+
+given #310 (T,wt=17): 629 (A v B) ^ ((B v (C v A)) ^ D) = (A v B) ^ D.  [para(2(a,1),139(a,1,2,1)),rewrite([6(3)])].
+
+given #311 (T,wt=17): 649 A ^ (B ^ (C ^ (D v (A v E)))) = B ^ (C ^ A).  [para(4(a,1),149(a,1,2)),rewrite([4(7)])].
+
+given #312 (T,wt=17): 652 (A v B) ^ (C v (A v (D v (B v E)))) = A v B.  [para(104(a,1),149(a,2)),rewrite([6(6),6(5),31(9),433(9)])].
+
+given #313 (T,wt=17): 654 A ^ (B ^ ((C v (D v A)) ^ E)) = B ^ (A ^ E).  [para(150(a,1),31(a,1,2)),flip(a)].
+
+given #314 (A,wt=18): 417 (A v B) ^ (B' v (C v A)) = (A v B) ^ (C v A).  [para(36(a,1),88(a,2,2)),rewrite([122(5)])].
+
+given #315 (T,wt=17): 663 (A v (B v C)) ^ (D ^ (C ^ E)) = D ^ (C ^ E).  [para(135(a,1),150(a,2)),rewrite([603(6)])].
+
+given #316 (T,wt=17): 664 (A v (B v C)) ^ (D ^ (E ^ C)) = D ^ (E ^ C).  [para(137(a,1),150(a,2)),rewrite([607(6)])].
+
+given #317 (T,wt=17): 665 A ^ ((B v (C v (D v (A v E)))) ^ F) = A ^ F.  [para(150(a,1),142(a,1,2)),rewrite([142(4)]),flip(a)].
+
+given #318 (T,wt=17): 667 A ^ (B ^ (C v (D v (E v (A v F))))) = B ^ A.  [para(149(a,1),150(a,1,2)),rewrite([154(4),6(4),6(3)]),flip(a)].
+
+given #319 (A,wt=29): 419 (A v (B v C)) ^ ((A v (B' v D)) ^ (A v (C' v D))) = (A v (B v C)) ^ (A v D).  [para(71(a,1),88(a,1,2,2,1)),rewrite([265(6),13(8)])].
+
+given #320 (T,wt=17): 668 A ^ ((B v (C v (D v (E v A)))) ^ F) = A ^ F.  [para(150(a,1),150(a,1,2)),rewrite([150(4)]),flip(a)].
+
+given #321 (T,wt=17): 670 A ^ (B ^ (C ^ (D v (E v A)))) = B ^ (C ^ A).  [para(4(a,1),154(a,1,2)),rewrite([4(7)])].
+
+given #322 (T,wt=17): 674 A ^ (B ^ (C v (D v (E v (F v A))))) = B ^ A.  [para(154(a,1),150(a,1,2)),rewrite([154(4)]),flip(a)].
+
+given #323 (T,wt=17): 679 (A v B) ^ (C ^ (B v (A v D))) = C ^ (B v A).  [para(170(a,1),31(a,1,2)),flip(a)].
+
+given #324 (A,wt=21): 430 (A' v B') ^ ((A v C) ^ (B v C)) = (A' v B') ^ C.  [para(380(a,1),90(a,1,1)),rewrite([265(5),380(9)])].
+
+given #325 (T,wt=17): 704 (A v (B v C)) ^ (D ^ (C v A)) = D ^ (C v A).  [para(171(a,1),137(a,1,2,2)),rewrite([171(9)])].
+
+given #326 (T,wt=17): 731 (A v (B v C)) ^ (B v (A v C)) = A v (B v C).  [para(176(a,1),265(a,1,1)),rewrite([6(2),6(4),6(6)]),flip(a)].
+
+given #327 (T,wt=17): 753 (A v B) ^ (C v (A v (D v (E v B)))) = A v B.  [para(122(a,1),146(a,1,2,2,2))].
+
+given #328 (T,wt=17): 778 (A v (B v (C v (D v E)))) ^ (D v B) = D v B.  [para(171(a,1),450(a,1,2)),rewrite([6(3),6(2),171(10)])].
+
+given #329 (A,wt=21): 440 (A' v B) ^ ((C v A) ^ (C v B)) = (C v A) ^ (A' v B).  [para(88(a,1),105(a,1,2))].
+
+given #330 (T,wt=17): 781 (A v (B v (C v (D v E)))) ^ (F ^ D) = F ^ D.  [para(455(a,1),137(a,1,2,2)),rewrite([455(11)])].
+
+given #331 (T,wt=17): 782 A ^ (B v (C v (D v (E v (F v (A v V6)))))) = A.  [para(455(a,1),150(a,1,2)),rewrite([103(3),6(3),6(2)]),flip(a)].
+
+given #332 (T,wt=17): 794 (A v (B v (C v (D v E)))) ^ (F ^ E) = F ^ E.  [para(460(a,1),137(a,1,2,2)),rewrite([460(11)])].
+
+given #333 (T,wt=17): 796 A ^ (B v (C v (D v (E v (F v (V6 v A)))))) = A.  [para(460(a,1),150(a,1,2)),rewrite([103(3)]),flip(a)].
+
+given #334 (A,wt=18): 444 A ^ (B ^ (C ^ (A' v D))) = A ^ (B ^ (C ^ D)).  [para(4(a,1),89(a,1,2)),rewrite([4(7)])].
+
+given #335 (T,wt=17): 797 (A v (B v C)) ^ ((B v A) ^ D) = (B v A) ^ D.  [para(471(a,1),4(a,1,1)),flip(a)].
+
+given #336 (T,wt=17): 803 (A v (B v C)) ^ (D ^ (B v A)) = D ^ (B v A).  [para(471(a,1),31(a,1,2)),flip(a)].
+
+given #337 (T,wt=17): 813 (A v (B v (C v (D v E)))) ^ (E v C) = E v C.  [para(171(a,1),501(a,1,2)),rewrite([171(10)])].
+
+given #338 (T,wt=17): 815 (A v (B v C)) ^ ((C v B) ^ D) = (C v B) ^ D.  [para(505(a,1),4(a,1,1)),flip(a)].
+
+given #339 (A,wt=18): 445 A ^ (B ^ (C v (A' v D))) = A ^ (B ^ (C v D)).  [para(33(a,1),89(a,1,2,2))].
+
+given #340 (T,wt=17): 822 (A v (B v C)) ^ (D ^ (C v B)) = D ^ (C v B).  [para(505(a,1),31(a,1,2)),flip(a)].
+
+given #341 (T,wt=17): 824 (A v (B v (C v (D v E)))) ^ (D v C) = D v C.  [para(505(a,1),142(a,2)),rewrite([6(5),6(4),822(9)])].
+
+given #342 (T,wt=17): 836 (A v B) ^ ((C v (B v A)) ^ D) = (A v B) ^ D.  [para(506(a,1),4(a,1,1)),flip(a)].
+
+given #343 (T,wt=17): 845 (A v B) ^ (C v (D v (B v (A v E)))) = A v B.  [para(506(a,1),149(a,2)),rewrite([6(6),6(5),815(9)])].
+
+given #344 (A,wt=23): 446 (A v B) ^ (C ^ ((A' v D) ^ (B' v D))) = (A v B) ^ (C ^ D).  [para(71(a,1),89(a,1,2,2,1)),rewrite([265(5)])].
+
+given #345 (T,wt=17): 847 (A v (B v (C v (D v E)))) ^ (E v D) = E v D.  [para(506(a,1),501(a,1,2)),rewrite([506(10)])].
+
+given #346 (T,wt=17): 869 (A v (B v C)) ^ ((C v A) ^ D) = (C v A) ^ D.  [para(693(a,1),4(a,1,1)),flip(a)].
+
+given #347 (T,wt=17): 877 (A v B) ^ (C v (B v (D v (A v E)))) = A v B.  [back_rewrite(705),rewrite([869(9)])].
+
+given #348 (T,wt=17): 1170 (A v (B v C')) ^ ((C v A) ^ (A v B')) = A.  [para(63(a,1),367(a,2)),rewrite([6(3),1122(8)])].
+
+given #349 (A,wt=18): 472 A ^ (B v (C v (A' v D))) = A ^ (B v (C v D)).  [para(6(a,1),100(a,1,2)),rewrite([6(7)])].
+
+given #350 (T,wt=17): 1274 (A' v (B' v C)) ^ ((C v B) ^ (C v A)) = C.  [para(180(a,1),377(a,2)),rewrite([6(8),415(9)])].
+
+given #351 (T,wt=17): 1499 (A v B') ^ (C ^ (D ^ (E ^ (A' ^ B)))) = 0.  [para(255(a,1),920(a,2)),rewrite([4(8),4(7),4(6),90(5)])].
+
+given #352 (T,wt=17): 1597 (A' v B) ^ (C ^ (D ^ (E ^ (B' ^ A)))) = 0.  [para(255(a,1),1017(a,2)),rewrite([4(8),4(7),4(6),197(5)])].
+
+given #353 (T,wt=17): 1598 (A' v B') ^ (C ^ (D ^ (E ^ (B ^ A)))) = 0.  [para(299(a,1),1017(a,2)),rewrite([4(9),4(8),4(7),198(7)])].
+
+given #354 (A,wt=25): 473 (A v B) ^ ((C v (A' v D)) ^ (C v (B' v D))) = (A v B) ^ (C v D).  [para(71(a,1),100(a,1,2,2,1)),rewrite([265(5),13(7)])].
+
+given #355 (T,wt=17): 1809 (A' v B) ^ (C ^ (D ^ (A ^ (B' ^ E)))) = 0.  [para(389(a,1),4(a,1,1)),rewrite([57(2),4(8),4(7),4(6)]),flip(a)].
+
+given #356 (T,wt=17): 1810 (A' v B) ^ (C ^ (D ^ (E ^ (A ^ B')))) = 0.  [para(4(a,1),389(a,1,2,2))].
+
+given #357 (T,wt=17): 1846 (A v (B v C)) ^ ((A' v C) ^ (C v B')) = C.  [para(2(a,1),201(a,1,2,2))].
+
+given #358 (T,wt=17): 2071 (A v B) ^ (B v (C v (D v (A v E)))) = A v B.  [para(553(a,1),204(a,1,2)),rewrite([1(3),94(3),25(4)]),flip(a)].
+
+given #359 (A,wt=19): 483 (A v B') ^ (A v (C v B)) = (A v B') ^ (A v C).  [para(197(a,1),13(a,1,2)),rewrite([13(3)]),flip(a)].
+
+given #360 (T,wt=17): 2073 (A v B) ^ (B v (C v (D v (E v A)))) = A v B.  [para(559(a,1),204(a,1,2)),rewrite([1(3),94(3),25(4)]),flip(a)].
+
+given #361 (T,wt=17): 2123 (A v B) ^ (C ^ (D v (B v A))) = C ^ (B v A).  [para(105(a,1),464(a,1,2)),rewrite([614(4)]),flip(a)].
+
+given #362 (T,wt=17): 2125 (A v B) ^ (C v (D v (E v (B v A)))) = A v B.  [para(152(a,1),464(a,1,2)),rewrite([176(3)]),flip(a)].
+
+given #363 (T,wt=17): 2128 (A v B) ^ (C ^ (D ^ (E ^ (B' ^ A')))) = 0.  [para(255(a,1),464(a,1,2)),rewrite([1(3),57(3),71(4)]),flip(a)].
+
+given #364 (A,wt=21): 484 (A' v B') ^ ((C v A) ^ (C v B)) = (A' v B') ^ C.  [para(13(a,1),197(a,1,2)),rewrite([380(2),380(9)])].
+
+given #365 (T,wt=17): 2435 (A v B) ^ (C v (D v (B v (E v A)))) = A v B.  [para(460(a,1),288(a,1,2,2)),rewrite([2(6),543(6),1(8),103(8),171(4),2(7),543(7)]),flip(a)].
+
+given #366 (T,wt=17): 2522 (A v B') ^ ((B v (C v A)) ^ (A v C')) = A.  [para(330(a,1),31(a,1)),flip(a)].
+
+given #367 (T,wt=17): 2555 (A v (B v (C v (D v E)))) ^ (E v B) = B v E.  [para(122(a,1),623(a,1,1,2,2))].
+
+given #368 (T,wt=17): 2604 (A v (B v (C v (D v E)))) ^ (D v A) = A v D.  [para(681(a,1),183(a,2)),rewrite([6(4),6(3),6(2),6(10),6(9),6(8),2071(11)])].
+
+given #369 (A,wt=19): 507 (A v (B v C)) ^ (A v (B v (D v C))) = A v (B v C).  [para(6(a,1),104(a,1,1)),rewrite([6(5),6(8)])].
+
+given #370 (T,wt=17): 2616 (A v (B v (C v (D v E)))) ^ (E v A) = E v A.  [para(122(a,1),700(a,1,1,2,2))].
+
+given #371 (T,wt=17): 2697 (A v B) ^ (C v (B v (D v (E v A)))) = B v A.  [para(122(a,1),748(a,1,2,2,2))].
+
+given #372 (T,wt=17): 2852 (A v B') ^ (C ^ (D ^ (B ^ (A' ^ E)))) = 0.  [para(894(a,1),4(a,1,1)),rewrite([57(2),4(8),4(7),4(6)]),flip(a)].
+
+given #373 (T,wt=17): 2854 (A v B') ^ (C ^ (D ^ (E ^ (B ^ A')))) = 0.  [para(4(a,1),894(a,1,2,2))].
+
+given #374 (A,wt=19): 508 (A v (B v C)) ^ (B v (D v (A v C))) = B v (A v C).  [para(33(a,1),104(a,1,1))].
+
+given #375 (T,wt=17): 2869 (A' v B') ^ (C ^ (D ^ (B ^ (A ^ E)))) = 0.  [para(903(a,1),4(a,1,1)),rewrite([57(2),4(8),4(7),4(6)]),flip(a)].
+
+given #376 (T,wt=17): 2937 (A v (B v C)) ^ ((C' v A) ^ (B' v A)) = A.  [para(2(a,1),340(a,1,1)),rewrite([6(2)])].
+
+given #377 (T,wt=17): 3649 (A v (B' v C)) ^ ((C' v A) ^ (B v A)) = A.  [para(1(a,1),392(a,1,2))].
+
+given #378 (T,wt=17): 3650 (A v (B v C')) ^ ((C v A) ^ (B' v A)) = A.  [para(2(a,1),392(a,1,1,2))].
+
+given #379 (A,wt=19): 538 (A v (B v C)) ^ (A v B') = (A v C) ^ (A v B').  [para(488(a,1),13(a,1,2)),rewrite([13(3)]),flip(a)].
+
+given #380 (T,wt=17): 3803 (A' v (B v C)) ^ ((C v B') ^ (C v A)) = C.  [para(1(a,1),393(a,1,2))].
+
+given #381 (T,wt=17): 3804 (A' v (B v C)) ^ ((C v A) ^ (B' v C)) = C.  [para(2(a,1),393(a,1,2,2))].
+
+given #382 (T,wt=17): 3955 (A' v (B' v C)) ^ ((C v A) ^ (B v C)) = C.  [para(2(a,1),394(a,1,2,2))].
+
+given #383 (T,wt=17): 4037 (A v (B' v C')) ^ ((C v A) ^ (B v A)) = A.  [para(1(a,1),425(a,1,2))].
+
+given #384 (A,wt=21): 540 (A v B) ^ ((C v B) ^ (A' v C')) = B ^ (A' v C').  [para(380(a,1),488(a,1,2)),rewrite([265(2),4(7),380(9)])].
+
+given #385 (T,wt=17): 4176 (A v B) ^ (C ^ (B v (D v A))) = C ^ (B v A).  [para(2(a,1),438(a,1,1))].
+
+given #386 (T,wt=17): 4286 (A v (B v C)) ^ (C v (B v A)) = A v (B v C).  [para(2(a,1),465(a,1,2,2))].
+
+given #387 (T,wt=17): 4730 (A' v B') ^ (C ^ (D ^ (B ^ (E ^ A)))) = 0.  [para(1(a,1),571(a,1,2,2,2)),rewrite([4(5)])].
+
+given #388 (T,wt=17): 4801 (A' v B) ^ (C ^ (D ^ (A ^ (E ^ B')))) = 0.  [para(25(a,1),590(a,1,1,2))].
+
+given #389 (A,wt=29): 545 (A v (B v C)) ^ ((B v (A' v D)) ^ (B v (C' v D))) = (A v (B v C)) ^ (B v D).  [para(107(a,1),88(a,1,1)),rewrite([71(5),71(5),265(8),265(8),13(11),13(11),58(8),94(10),107(13)])].
+
+given #390 (T,wt=17): 4833 (A v B') ^ (C ^ (D ^ (B ^ (E ^ A')))) = 0.  [para(537(a,1),590(a,1,2,2,2)),rewrite([71(2),25(5),2(4),13(4),23(2),94(4)])].
+
+given #391 (T,wt=17): 6463 (A v (B v C)) ^ ((C' v A) ^ (A v B')) = A.  [para(25(a,1),1170(a,1,1,2,2))].
+
+given #392 (T,wt=17): 6538 (A' v (B' v C)) ^ ((C v B) ^ (A v C)) = C.  [para(2(a,1),1274(a,1,2,2))].
+
+given #393 (T,wt=17): 6546 (A' v (B v C')) ^ ((C v B) ^ (B v A)) = B.  [para(36(a,1),1274(a,1,2,1)),rewrite([71(3),2(5),13(5),23(5),1(5),94(5)])].
+
+given #394 (A,wt=22): 546 (A v B) ^ (B' v (C v (A v D))) = (A v B) ^ (C v (A v D)).  [para(107(a,1),88(a,2,2)),rewrite([543(6)])].
+
+given #395 (T,wt=17): 6786 (A v (B' v C)) ^ ((A' v C) ^ (C v B)) = C.  [para(25(a,1),1846(a,1,2,2,2))].
+
+given #396 (T,wt=17): 6787 (A' v B) ^ ((A v (C v B)) ^ (B v C')) = B.  [para(1846(a,1),31(a,1)),flip(a)].
+
+given #397 (T,wt=17): 7251 (A' v (B v C)) ^ ((C' v B) ^ (A v B)) = B.  [para(33(a,1),3649(a,1,1))].
+
+given #398 (T,wt=17): 7257 (A' v (B v C)) ^ ((C v B') ^ (A v C)) = C.  [para(122(a,1),3649(a,1,1)),rewrite([71(5),2(7),13(7),23(7),1(7),94(7)])].
+
+given #399 (A,wt=19): 550 (A v (B v C)) ^ (A v C') = (A v B) ^ (A v C').  [para(510(a,1),13(a,1,2)),rewrite([13(3)]),flip(a)].
+
+given #400 (T,wt=17): 7349 (A' v (B v C)) ^ ((B' v C) ^ (C v A)) = C.  [para(2(a,1),3803(a,1,2,1))].
+
+given #401 (T,wt=17): 7458 (A' v (B v C')) ^ ((C v B) ^ (A v B)) = B.  [para(33(a,1),4037(a,1,1))].
+
+given #402 (T,wt=17): 7861 (A' v (B v C)) ^ ((C' v B) ^ (B v A)) = B.  [para(25(a,1),6546(a,1,1,2,2))].
+
+given #403 (T,wt=18): 637 (A v B) ^ (B v (C v A')) = (A v B) ^ (B v C).  [para(179(a,1),139(a,1,2)),rewrite([6(7)]),flip(a)].
+
+given #404 (A,wt=21): 551 (A v B) ^ ((A v C) ^ (B' v C')) = A ^ (B' v C').  [para(13(a,1),510(a,1,1)),rewrite([380(5),4(7),380(9)])].
+
+given #405 (T,wt=18): 718 (A v B) ^ (A' v (C v B)) = (A v B) ^ (C v B).  [para(28(a,1),265(a,1,1)),rewrite([265(2),6(7)]),flip(a)].
+
+given #406 (T,wt=18): 720 (A v B) ^ (C v (A' v B)) = (A v B) ^ (C v B).  [para(85(a,1),265(a,1,1)),rewrite([265(2),6(7)]),flip(a)].
+
+given #407 (T,wt=18): 886 (A' v (B v C)) ^ (D ^ (B' ^ (C' ^ A))) = 0.  [para(71(a,1),756(a,1,2,2,1)),rewrite([4(7)])].
+
+given #408 (T,wt=18): 887 (A' v (B' v C)) ^ (D ^ (C' ^ (A ^ B))) = 0.  [para(380(a,1),756(a,1,1,1)),rewrite([6(4)])].
+
+given #409 (A,wt=29): 563 (A v (B v C)) ^ ((C v (A' v D)) ^ (C v (B' v D))) = (A v (B v C)) ^ (C v D).  [para(122(a,1),88(a,1,1)),rewrite([71(5),71(5),265(8),265(8),13(11),13(11),58(11),1(10),94(10),122(13)])].
+
+given #410 (T,wt=18): 908 (A' v (B' v C')) ^ (D ^ (C ^ (A ^ B))) = 0.  [para(86(a,1),768(a,1,2,2)),rewrite([380(4),71(3),25(2),265(4),265(8),6(4),84(4),6(6),94(7)])].
+
+given #411 (T,wt=18): 915 (A v B) ^ (C ^ ((A v B') ^ D)) = C ^ (A ^ D).  [para(181(a,1),31(a,1,2)),flip(a)].
+
+given #412 (T,wt=18): 921 (A v B) ^ (C ^ (D ^ (A v B'))) = A ^ (C ^ D).  [para(137(a,1),181(a,1,2)),rewrite([309(11)])].
+
+given #413 (T,wt=18): 959 A ^ (B ^ ((C v A') ^ D)) = A ^ (B ^ (C ^ D)).  [para(4(a,1),193(a,2,2)),rewrite([265(3),4(6),193(7)])].
+
+given #414 (A,wt=22): 564 (A v B) ^ (B' v (C v (D v A))) = (A v B) ^ (C v (D v A)).  [para(122(a,1),88(a,2,2)),rewrite([561(6)])].
+
+given #415 (T,wt=18): 960 A ^ ((B v (C v A')) ^ D) = A ^ ((B v C) ^ D).  [para(6(a,1),193(a,1,2,1))].
+
+given #416 (T,wt=18): 970 A ^ (B v (C v (D v A'))) = A ^ (B v (C v D)).  [para(6(a,1),195(a,1,2,2))].
+
+given #417 (T,wt=18): 972 A ^ (B ^ (C v (D v A'))) = B ^ (A ^ (C v D)).  [para(195(a,1),31(a,1,2)),flip(a)].
+
+given #418 (T,wt=18): 980 A ^ (B ^ (C ^ (D v A'))) = B ^ (C ^ (A ^ D)).  [para(4(a,1),198(a,1,2)),rewrite([4(8)])].
+
+given #419 (A,wt=22): 573 (A v B') ^ ((A v C) ^ ((A v D) ^ ((A v B) ^ (A v E)))) = A.  [para(299(a,1),13(a,1,2)),rewrite([12(2),13(6),13(6),13(6)]),flip(a)].
+
+given #420 (T,wt=18): 1014 (A v B) ^ (C ^ ((A' v B) ^ D)) = C ^ (B ^ D).  [para(200(a,1),31(a,1,2)),flip(a)].
+
+given #421 (T,wt=18): 1021 (A v B) ^ (C ^ (D ^ (A' v B))) = C ^ (D ^ B).  [para(137(a,1),200(a,1,2)),rewrite([436(11)])].
+
+given #422 (T,wt=18): 1057 (A v B) ^ (C ^ ((B v A') ^ D)) = C ^ (B ^ D).  [para(329(a,1),31(a,1,2)),flip(a)].
+
+given #423 (T,wt=18): 1062 (A v B) ^ (C ^ (D ^ (B v A'))) = B ^ (C ^ D).  [para(137(a,1),329(a,1,2)),rewrite([309(11)])].
+
+given #424 (A,wt=20): 605 (A' v (B' v C')) ^ (D ^ (E ^ (A ^ (B ^ C)))) = 0.  [para(135(a,1),302(a,1,2,2,2)),rewrite([380(3),380(3)])].
+
+given #425 (T,wt=18): 1115 (A v B) ^ (C ^ ((B' v A) ^ D)) = C ^ (A ^ D).  [para(336(a,1),31(a,1,2)),flip(a)].
+
+given #426 (T,wt=18): 1121 (A v B) ^ (C ^ (D ^ (B' v A))) = C ^ (D ^ A).  [para(137(a,1),336(a,1,2)),rewrite([436(11)])].
+
+given #427 (T,wt=18): 1168 (A v B') ^ (C ^ ((B v A) ^ D)) = C ^ (A ^ D).  [para(367(a,1),31(a,1,2)),flip(a)].
+
+given #428 (T,wt=18): 1174 (A v B') ^ (C ^ (D ^ (B v A))) = C ^ (D ^ A).  [para(137(a,1),367(a,1,2)),rewrite([436(10)])].
+
+given #429 (A,wt=19): 617 (A v B) ^ ((C v (A v (B v D))) ^ E) = (A v B) ^ E.  [para(6(a,1),142(a,1,2,1,2))].
+
+given #430 (T,wt=18): 1176 (A v B) ^ (C v (A v B')) = (C v A) ^ (A v B).  [para(693(a,1),367(a,1,2)),rewrite([6(3),1(5)])].
+
+given #431 (T,wt=18): 1199 (A v (B v C')) ^ (C v A) = (A v C) ^ (A v B).  [para(170(a,1),371(a,1,2)),rewrite([6(3)])].
+
+given #432 (T,wt=18): 1246 (A' v B) ^ (C ^ ((B v A) ^ D)) = C ^ (B ^ D).  [para(372(a,1),31(a,1,2)),flip(a)].
+
+given #433 (T,wt=18): 1253 (A' v B) ^ (C ^ (D ^ (B v A))) = B ^ (C ^ D).  [para(137(a,1),372(a,1,2)),rewrite([309(10)])].
+
+given #434 (A,wt=23): 630 (A v (B v C)) ^ ((A v (B v (C v D))) ^ E) = (A v (B v C)) ^ E.  [para(6(a,1),139(a,1,1)),rewrite([6(5),6(9)])].
+
+given #435 (T,wt=18): 1316 A v (B v (C v (D v (E v (F v (A' v V6)))))) = 1.  [para(553(a,1),153(a,1,1)),rewrite([94(10),553(14)])].
+
+given #436 (T,wt=18): 1359 A v (B v (C v (D v (E v (F v (V6 v A')))))) = 1.  [para(559(a,1),153(a,1,1)),rewrite([94(10),559(14)])].
+
+given #437 (T,wt=18): 1374 A' v (B v (C v (D v (E v (F v (A v V6)))))) = 1.  [para(569(a,1),153(a,1,1)),rewrite([94(10),569(14)])].
+
+given #438 (T,wt=18): 1375 A' v (B v (C v (D v (E v (F v (V6 v A)))))) = 1.  [para(570(a,1),153(a,1,1)),rewrite([94(10),570(14)])].
+
+given #439 (A,wt=21): 631 (A v B) ^ (C ^ ((A v (B v D)) ^ E)) = C ^ ((A v B) ^ E).  [para(139(a,1),31(a,1,2)),flip(a)].
+
+given #440 (T,wt=18): 1461 (A' v B) ^ (C ^ (A ^ D)) = B ^ (C ^ (A ^ D)).  [para(608(a,1),4(a,1,1)),rewrite([4(3),4(2),4(7)]),flip(a)].
+
+given #441 (T,wt=18): 1462 (A' v B) ^ (C ^ (D ^ A)) = B ^ (C ^ (D ^ A)).  [para(4(a,1),608(a,1,2)),rewrite([4(7)])].
+
+given #442 (T,wt=18): 1464 (A v (B' v C)) ^ (D ^ B) = (A v C) ^ (D ^ B).  [para(33(a,1),608(a,1,1))].
+
+given #443 (T,wt=18): 1491 (A v B') ^ (C ^ ((A v B) ^ D)) = A ^ (C ^ D).  [para(920(a,1),4(a,1,1)),rewrite([4(2),4(7)]),flip(a)].
+
+given #444 (A,wt=23): 632 (A v (B v C)) ^ ((B v (A v (C v D))) ^ E) = (B v (A v C)) ^ E.  [para(33(a,1),139(a,1,1)),rewrite([6(4)])].
+
+given #445 (T,wt=18): 1492 (A v B') ^ (C ^ (D ^ (A v B))) = A ^ (C ^ D).  [para(4(a,1),920(a,1,2))].
+
+given #446 (T,wt=18): 1554 (A v B') ^ (C ^ (B ^ D)) = A ^ (C ^ (B ^ D)).  [para(963(a,1),4(a,1,1)),rewrite([4(3),4(2),4(7)]),flip(a)].
+
+given #447 (T,wt=18): 1555 (A v B') ^ (C ^ (D ^ B)) = A ^ (C ^ (D ^ B)).  [para(4(a,1),963(a,1,2)),rewrite([4(7)])].
+
+given #448 (T,wt=18): 1556 (A v (B v C')) ^ (D ^ C) = (A v B) ^ (D ^ C).  [para(6(a,1),963(a,1,1))].
+
+given #449 (A,wt=19): 633 (A v B) ^ ((A v (C v (B v D))) ^ E) = (A v B) ^ E.  [para(33(a,1),139(a,1,2,1,2))].
+
+given #450 (T,wt=18): 1585 (A' v B) ^ (C ^ ((A v B) ^ D)) = B ^ (C ^ D).  [para(1017(a,1),4(a,1,1)),rewrite([4(2),4(7)]),flip(a)].
+
+given #451 (T,wt=18): 1586 (A' v B) ^ (C ^ (D ^ (A v B))) = B ^ (C ^ D).  [para(4(a,1),1017(a,1,2))].
+
+given #452 (T,wt=18): 1601 (A' v (B v C)) ^ (C v A) = (B v C) ^ (C v A).  [para(171(a,1),1017(a,1,2))].
+
+given #453 (T,wt=18): 1967 (A v (B v C')) ^ (C v B) = (A v B) ^ (C v B).  [para(202(a,1),367(a,1,2)),rewrite([6(3),720(10)])].
+
+given #454 (A,wt=19): 638 (A' v B) ^ (B v (C v A)) = (A' v B) ^ (B v C).  [para(333(a,1),139(a,1,2)),rewrite([6(8)]),flip(a)].
+
+given #455 (T,wt=18): 2671 (A v B) ^ (C v (B v A')) = (A v B) ^ (C v B).  [para(332(a,1),101(a,1,2)),flip(a)].
+
+given #456 (T,wt=18): 2835 (A v B) ^ (C v (B' v A)) = (A v B) ^ (C v A).  [para(338(a,1),101(a,1,2)),flip(a)].
+
+given #457 (T,wt=18): 3344 A ^ (B ^ (C ^ (D ^ (E ^ (F ^ (A' ^ V6)))))) = 0.  [para(4(a,1),1318(a,1,2,2,2,2))].
+
+given #458 (T,wt=18): 3347 A ^ (B ^ (C ^ (D ^ (E ^ (F ^ (V6 ^ A')))))) = 0.  [para(137(a,1),1318(a,1,2,2,2,2,2))].
+
+given #459 (A,wt=19): 639 (A v B) ^ (C ^ (D v (A v (B v E)))) = C ^ (A v B).  [para(105(a,1),139(a,1,2)),rewrite([174(5)]),flip(a)].
+
+given #460 (T,wt=18): 3534 A' ^ (B ^ (C ^ (D ^ (E ^ (F ^ (A ^ V6)))))) = 0.  [para(4(a,1),1418(a,1,2,2,2,2))].
+
+given #461 (T,wt=18): 3538 A' ^ (B ^ (C ^ (D ^ (E ^ (F ^ (V6 ^ A)))))) = 0.  [para(137(a,1),1418(a,1,2,2,2,2,2))].
+
+given #462 (T,wt=18): 3888 (A' v (B v C)) ^ (B v A) = (B v C) ^ (B v A).  [para(2966(a,1),371(a,1,2)),rewrite([6(3),1199(5)]),flip(a)].
+
+given #463 (T,wt=18): 4236 (A v (B' v C)) ^ (B v A) = (A v B) ^ (A v C).  [para(405(a,1),1(a,1)),flip(a)].
+
+given #464 (A,wt=19): 641 (A v B) ^ (C v (D v (E v (A v (B v F))))) = A v B.  [para(152(a,1),139(a,1,2)),rewrite([43(4)]),flip(a)].
+
+given #465 (T,wt=18): 6892 (A v (B' v C)) ^ (C v B) = (B v C) ^ (A v C).  [para(374(a,1),2123(a,1,2)),flip(a)].
+
+given #466 (T,wt=19): 643 (A v B) ^ ((A v (C v (D v B))) ^ E) = (A v B) ^ E.  [para(122(a,1),139(a,1,2,1,2))].
+
+given #467 (T,wt=19): 655 (A v B) ^ ((C v (A v (D v B))) ^ E) = (A v B) ^ E.  [para(33(a,1),150(a,1,2,1,2))].
+
+given #468 (T,wt=19): 672 (A v B) ^ (C ^ (D v (A v (E v B)))) = C ^ (A v B).  [para(33(a,1),154(a,1,2,2,2))].
+
+given #469 (A,wt=21): 646 (A v (B v C)) ^ (D ^ ((A v B) ^ E)) = D ^ ((A v B) ^ E).  [para(135(a,1),139(a,2)),rewrite([603(8)])].
+
+given #470 (T,wt=19): 675 (A v (B v C)) ^ (C v (A v (B v D))) = C v (A v B).  [para(6(a,1),170(a,1,1)),rewrite([6(4)])].
+
+given #471 (T,wt=19): 676 (A v (B v C)) ^ (B v (C v (A v D))) = B v (C v A).  [para(6(a,1),170(a,1,2)),rewrite([6(8)])].
+
+given #472 (T,wt=19): 677 (A v (B v C)) ^ (A v (C v (B v D))) = A v (C v B).  [para(170(a,1),13(a,1,2)),flip(a)].
+
+given #473 (T,wt=19): 684 A ^ (B ^ (C ^ ((A v D) ^ E))) = B ^ (C ^ (A ^ E)).  [para(4(a,1),141(a,1,2)),rewrite([4(8)])].
+
+given #474 (A,wt=21): 647 (A v (B v C)) ^ (D ^ (E ^ (A v B))) = D ^ (E ^ (A v B)).  [para(137(a,1),139(a,2)),rewrite([607(8)])].
+
+given #475 (T,wt=19): 690 (A v B) ^ (C ^ (D ^ (A ^ E))) = C ^ (D ^ (A ^ E)).  [para(141(a,1),137(a,1,2,2)),rewrite([4(7),4(6),607(5),603(6),141(9)])].
+
+given #476 (T,wt=19): 692 A ^ (B ^ ((C v (D v (A v E))) ^ F)) = B ^ (A ^ F).  [para(141(a,1),150(a,1,2)),rewrite([654(5),6(5),6(4)]),flip(a)].
+
+given #477 (T,wt=19): 694 (A v (B v C)) ^ (C v (D v (A v B))) = A v (B v C).  [para(6(a,1),171(a,1,1)),rewrite([6(8)])].
+
+given #478 (T,wt=19): 695 (A v (B v C)) ^ (B v (C v (D v A))) = A v (B v C).  [para(6(a,1),171(a,1,2))].
+
+given #479 (A,wt=21): 666 (A v B) ^ ((C v (D v (A v (B v E)))) ^ F) = (A v B) ^ F.  [para(150(a,1),139(a,1,2)),rewrite([139(5)]),flip(a)].
+
+given #480 (T,wt=19): 696 (A v (B v C)) ^ (A v (C v (D v B))) = A v (B v C).  [para(171(a,1),13(a,1,2)),flip(a)].
+
+given #481 (T,wt=19): 699 (A v (B v C)) ^ (C v (A v (D v B))) = A v (B v C).  [para(33(a,1),171(a,1,2,2)),rewrite([6(2),6(8)])].
+
+given #482 (T,wt=19): 729 (A' v B) ^ (A v (C v B)) = (A' v B) ^ (C v B).  [para(90(a,1),265(a,1,1)),rewrite([265(3),6(8)]),flip(a)].
+
+given #483 (T,wt=19): 734 (A' v B) ^ (C v (A v B)) = (A' v B) ^ (C v B).  [para(197(a,1),265(a,1,1)),rewrite([265(3),6(8)]),flip(a)].
+
+given #484 (A,wt=21): 673 (A v B) ^ (C ^ (D v (E v (A v (B v F))))) = C ^ (A v B).  [para(154(a,1),139(a,1,2)),rewrite([174(5)]),flip(a)].
+
+given #485 (T,wt=19): 735 (A v (B v C)) ^ (A' v C) = (B v C) ^ (A' v C).  [para(488(a,1),265(a,1,1)),rewrite([265(3),6(6)]),flip(a)].
+
+given #486 (T,wt=19): 736 (A v (B v C)) ^ (B' v C) = (A v C) ^ (B' v C).  [para(510(a,1),265(a,1,1)),rewrite([265(3),6(6)]),flip(a)].
+
+given #487 (T,wt=19): 745 (A v (B v C)) ^ (B v (A v (D v C))) = B v (A v C).  [para(170(a,1),265(a,1,1)),rewrite([6(2),6(4),6(7),6(6)]),flip(a)].
+
+given #488 (T,wt=19): 754 (A v (B v (C v D))) ^ (E ^ (B v C)) = E ^ (B v C).  [para(146(a,1),137(a,1,2,2)),rewrite([146(11)])].
+
+given #489 (A,wt=23): 702 (A v (B v (C v D))) ^ (D v (A v (B v C))) = A v (B v (C v D)).  [para(107(a,1),171(a,1,2,2)),rewrite([6(3),6(2),6(10),6(9)])].
+
+given #490 (T,wt=19): 780 (A v B) ^ (A v (C v (D v (E v (B v F))))) = A v B.  [para(455(a,1),13(a,1,2)),flip(a)].
+
+given #491 (T,wt=19): 783 (A v B) ^ (C v (D v (E v (A v (F v B))))) = A v B.  [para(455(a,1),265(a,1,1)),rewrite([6(7),6(6),6(5),6(4)]),flip(a)].
+
+given #492 (T,wt=19): 785 (A v B) ^ (C ^ (A v (D v (B v E)))) = C ^ (A v B).  [para(148(a,1),31(a,1,2)),flip(a)].
+
+given #493 (T,wt=19): 791 (A v (B v (C v D))) ^ (E ^ (A v C)) = E ^ (A v C).  [para(148(a,1),137(a,1,2,2)),rewrite([148(11)])].
+
+given #494 (A,wt=26): 728 (A v (B v C)) ^ (A v (B' v (D v C))) = (A v (B v C)) ^ (A v (D v C)).  [para(88(a,1),265(a,1,1)),rewrite([265(4),6(2),6(4),6(7),6(11),6(10)]),flip(a)].
+
+given #495 (T,wt=19): 793 (A v B) ^ (A v (C v (D v (E v (F v B))))) = A v B.  [para(460(a,1),13(a,1,2)),flip(a)].
+
+given #496 (T,wt=19): 798 (A v (B v (C v D))) ^ (B v (C v A)) = B v (C v A).  [para(6(a,1),471(a,1,1,2)),rewrite([6(5),6(8)])].
+
+given #497 (T,wt=19): 799 (A v (B v (C v D))) ^ (C v (A v B)) = C v (A v B).  [para(6(a,1),471(a,1,1))].
+
+given #498 (T,wt=19): 800 (A v (B v (C v D))) ^ (A v (C v B)) = A v (C v B).  [para(471(a,1),13(a,1,2)),flip(a)].
+
+given #499 (A,wt=22): 732 (A v B) ^ (C v (A' v (D v B))) = (A v B) ^ (C v (D v B)).  [para(100(a,1),265(a,1,1)),rewrite([265(3),6(3),6(9),6(8)]),flip(a)].
+
+NOTE: Back_subsumption disabled, ratio of kept to back_subsumed is 23 (0.00 of 9.53 sec).
+
+given #500 (T,wt=19): 806 (A v (B v (C v D))) ^ (B v (A v D)) = B v (A v D).  [para(471(a,1),265(a,1,1)),rewrite([6(2),6(5),6(4),6(7)]),flip(a)].
+
+given #501 (T,wt=19): 809 (A v (B v (C v D))) ^ (E ^ (B v D)) = E ^ (B v D).  [para(33(a,1),501(a,1,1,2))].
+
+given #502 (T,wt=19): 814 (A v B) ^ (C v (D v (A v (E v (B v F))))) = A v B.  [para(148(a,1),501(a,1,2)),rewrite([1(7),148(12)])].
+
+given #503 (T,wt=19): 816 (A v (B v (C v D))) ^ (D v (B v C)) = D v (B v C).  [para(6(a,1),505(a,1,1,2))].
+
+given #504 (A,wt=21): 750 (A v (B v C)) ^ (D v (A v (B v (C v E)))) = A v (B v C).  [para(6(a,1),146(a,1,1)),rewrite([6(5),6(9)])].
+
+given #505 (T,wt=19): 817 (A v (B v (C v D))) ^ (C v (D v B)) = C v (D v B).  [para(6(a,1),505(a,1,2)),rewrite([6(8)])].
+
+given #506 (T,wt=19): 818 (A v (B v (C v D))) ^ (A v (D v C)) = A v (D v C).  [para(505(a,1),13(a,1,2)),flip(a)].
+
+given #507 (T,wt=19): 823 (A v (B v (C v D))) ^ (B v (D v C)) = B v (D v C).  [para(33(a,1),505(a,1,1,2)),rewrite([6(5),6(8)])].
+
+given #508 (T,wt=19): 825 (A v (B v (C v D))) ^ (C v (B v D)) = C v (B v D).  [para(505(a,1),265(a,1,1)),rewrite([6(2),6(5),6(4),6(7)]),flip(a)].
+
+given #509 (A,wt=21): 751 (A v (B v C)) ^ (A v (D v (B v (C v E)))) = A v (B v C).  [para(146(a,1),13(a,1,2)),flip(a)].
+
+given #510 (T,wt=19): 828 (A v B) ^ (C ^ (A v (D v (E v B)))) = C ^ (A v B).  [para(153(a,1),31(a,1,2)),flip(a)].
+
+given #511 (T,wt=19): 833 (A v (B v (C v D))) ^ (E ^ (A v D)) = E ^ (A v D).  [para(153(a,1),137(a,1,2,2)),rewrite([153(11)])].
+
+given #512 (T,wt=19): 834 (A v B) ^ (C v (A v (D v (E v (B v F))))) = A v B.  [para(153(a,1),149(a,2)),rewrite([6(8),6(7),6(6),31(11),643(11)])].
+
+given #513 (T,wt=19): 835 (A v B) ^ (C v (D v (A v (E v (F v B))))) = A v B.  [para(153(a,1),501(a,1,2)),rewrite([1(7),153(12)])].
+
+given #514 (A,wt=21): 752 (A v (B v C)) ^ (D v (B v (A v (C v E)))) = B v (A v C).  [para(33(a,1),146(a,1,1)),rewrite([6(4)])].
+
+given #515 (T,wt=19): 837 (A v (B v C)) ^ (D v (C v (A v B))) = A v (B v C).  [para(6(a,1),506(a,1,1)),rewrite([6(8)])].
+
+given #516 (T,wt=19): 838 (A v (B v C)) ^ (D v (B v (C v A))) = A v (B v C).  [para(6(a,1),506(a,1,2,2))].
+
+given #517 (T,wt=19): 839 (A v (B v C)) ^ (A v (D v (C v B))) = A v (B v C).  [para(506(a,1),13(a,1,2)),flip(a)].
+
+given #518 (T,wt=19): 844 (A v (B v C)) ^ (D v (A v (C v B))) = A v (B v C).  [para(33(a,1),506(a,1,2,2)),rewrite([6(2),6(8)])].
+
+given #519 (A,wt=21): 755 (A v (B v C)) ^ (D v (A v (B v (E v C)))) = A v (B v C).  [para(146(a,1),265(a,1,1)),rewrite([6(2),6(4),6(8),6(7),6(6)]),flip(a)].
+
+given #520 (T,wt=19): 846 (A v (B v C)) ^ (D v (B v (A v C))) = A v (B v C).  [para(506(a,1),265(a,1,1)),rewrite([6(2),6(4),6(7),6(6)]),flip(a)].
+
+given #521 (T,wt=19): 870 (A v (B v (C v D))) ^ (D v (A v B)) = D v (A v B).  [para(6(a,1),693(a,1,1))].
+
+given #522 (T,wt=19): 871 (A v (B v (C v D))) ^ (C v (D v A)) = C v (D v A).  [para(6(a,1),693(a,1,2)),rewrite([6(8)])].
+
+given #523 (T,wt=19): 872 (A v (B v (C v D))) ^ (A v (D v B)) = A v (D v B).  [para(693(a,1),13(a,1,2)),flip(a)].
+
+given #524 (A,wt=21): 777 (A v (B v C)) ^ (D ^ ((B v A') ^ (B v C'))) = D ^ B.  [para(450(a,1),89(a,2)),rewrite([71(5),71(5),2(8),13(8),13(8),23(6),94(8)])].
+
+============================== STATISTICS ============================
+
+Given=524. Generated=259972. Kept=14699. proofs=0.
+Usable=428. Sos=8305. Demods=8111. Limbo=77, Disabled=5911. Hints=0.
+Kept_by_rule=0, Deleted_by_rule=0.
+Forward_subsumed=245273. Back_subsumed=609.
+Sos_limit_deleted=0. Sos_displaced=0. Sos_removed=0.
+New_demodulators=13585 (6 lex), Back_demodulated=5278. Back_unit_deleted=0.
+Demod_attempts=5593275. Demod_rewrites=1350491.
+Res_instance_prunes=0. Para_instance_prunes=0. Basic_paramod_prunes=0.
+Nonunit_fsub_feature_tests=0. Nonunit_bsub_feature_tests=0.
+Megabytes=29.24.
+User_CPU=10.00, System_CPU=0.25, Wall_clock=10.
+
+============================== end of statistics =====================
+
+============================== end of search =========================
+
+SEARCH FAILED
+
+Exiting with failure.
+
+Process 11176 exit (max_seconds) Thu Mar 21 16:11:55 2024

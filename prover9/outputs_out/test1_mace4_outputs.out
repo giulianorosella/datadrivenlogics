@@ -1,0 +1,135 @@
+
+
+
+
+============================== Mace4 =================================
+Mace4 (64) version 2009-11A, November 2009.
+Process 10849 was started by giulianoros on giulianoros-VirtualBox,
+Thu Mar 21 16:03:56 2024
+The command was "prover9/bin/LADR-2009-11A/bin/mace4 -c -f prover9/conf/default_input.in prover9/inputs_in/test1_input-in".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file prover9/conf/default_input.in
+
+set(ignore_option_dependencies).
+if(Prover9).
+% Conditional input omitted.
+end_if.
+if(Mace4).
+% Conditional input included.
+set(prolog_style_variables).
+assign(max_seconds,60).
+end_if.
+
+formulas(assumptions).
+X ^ Y = Y ^ X # label(L1).
+X v Y = Y v X # label(L2).
+X ^ (Y ^ Z) = (X ^ Y) ^ Z # label(L3).
+X v (Y v Z) = (X v Y) v Z # label(L4).
+X v X = X # label(L5).
+X ^ X = X # label(L6).
+X v (X ^ Y) = X # label(L7).
+X ^ (X v Y) = X # label(L8).
+X v 1 = 1 # label(L9).
+X v 0 = X # label(L10).
+X v (Y ^ Z) = (X v Y) ^ (X v Z) # label(L11).
+X ^ (Y v Z) = (X ^ Y) v (X ^ Z) # label(L12).
+X * X = 1.
+(X * Y) ^ Y = Y.
+X ^ (X * Y) = X ^ Y.
+X * (Y ^ Z) = (X * Y) ^ (X * Z).
+(X v Y) * Z = (X * Z) ^ (Y * Z).
+X ^ 0 = 0.
+X v X' = 1.
+X ^ X' = 0.
+X'' = X.
+X * Y = X' v Y.
+end_of_list.
+
+% Reading from file prover9/inputs_in/test1_input-in
+
+
+============================== end of input ==========================
+
+% Enabling option dependencies (ignore applies only on input).
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+
+============================== end of process non-clausal formulas ===
+
+============================== CLAUSES FOR SEARCH ====================
+
+formulas(mace4_clauses).
+A ^ B = B ^ A # label(L1).
+A v B = B v A # label(L2).
+A ^ (B ^ C) = (A ^ B) ^ C # label(L3).
+A v (B v C) = (A v B) v C # label(L4).
+A v A = A # label(L5).
+A ^ A = A # label(L6).
+A v (A ^ B) = A # label(L7).
+A ^ (A v B) = A # label(L8).
+A v 1 = 1 # label(L9).
+A v 0 = A # label(L10).
+A v (B ^ C) = (A v B) ^ (A v C) # label(L11).
+A ^ (B v C) = (A ^ B) v (A ^ C) # label(L12).
+A * A = 1.
+(A * B) ^ B = B.
+A ^ (A * B) = A ^ B.
+A * (B ^ C) = (A * B) ^ (A * C).
+(A v B) * C = (A * C) ^ (B * C).
+A ^ 0 = 0.
+A v A' = 1.
+A ^ A' = 0.
+A'' = A.
+A * B = A' v B.
+end_of_list.
+
+============================== end of clauses for search =============
+
+% The largest natural number in the input is 1.
+
+============================== DOMAIN SIZE 2 =========================
+
+============================== MODEL =================================
+
+interpretation( 2, [number=1, seconds=0], [
+
+        function('(_), [ 1, 0 ]),
+
+        function(*(_,_), [
+			   1, 1,
+			   0, 1 ]),
+
+        function(^(_,_), [
+			   0, 0,
+			   0, 1 ]),
+
+        function(v(_,_), [
+			   0, 1,
+			   1, 1 ])
+]).
+
+============================== end of model ==========================
+
+============================== STATISTICS ============================
+
+For domain size 2.
+
+Current CPU time: 0.00 seconds (total CPU time: 0.00 seconds).
+Ground clauses: seen=94, kept=16.
+Selections=0, assignments=0, propagations=14, current_models=1.
+Rewrite_terms=29, rewrite_bools=16, indexes=1.
+Rules_from_neg_clauses=8, cross_offs=8.
+
+============================== end of statistics =====================
+
+User_CPU=0.00, System_CPU=0.00, Wall_clock=0.
+
+Exiting with 1 model.
+
+Process 10849 exit (max_models) Thu Mar 21 16:03:56 2024
+The process finished Thu Mar 21 16:03:56 2024

@@ -1,0 +1,189 @@
+============================== Prover9 ===============================
+Prover9 (64) version 2009-11A, November 2009.
+Process 11301 was started by giulianoros on giulianoros-VirtualBox,
+Thu Mar 21 16:13:05 2024
+The command was "prover9/bin/LADR-2009-11A/bin/prover9 -f prover9/conf/default_input.in prover9/inputs_in/test2_input.in".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file prover9/conf/default_input.in
+
+set(ignore_option_dependencies).
+if(Prover9).
+% Conditional input included.
+assign(max_seconds,10).
+set(prolog_style_variables).
+end_if.
+if(Mace4).
+% Conditional input omitted.
+end_if.
+
+formulas(assumptions).
+X ^ Y = Y ^ X # label(L1).
+X v Y = Y v X # label(L2).
+X ^ (Y ^ Z) = (X ^ Y) ^ Z # label(L3).
+X v (Y v Z) = (X v Y) v Z # label(L4).
+X v X = X # label(L5).
+X ^ X = X # label(L6).
+X v (X ^ Y) = X # label(L7).
+X ^ (X v Y) = X # label(L8).
+X v 1 = 1 # label(L9).
+X v 0 = X # label(L10).
+X v (Y ^ Z) = (X v Y) ^ (X v Z) # label(L11).
+X ^ (Y v Z) = (X ^ Y) v (X ^ Z) # label(L12).
+X * X = 1.
+(X * Y) ^ Y = Y.
+X ^ (X * Y) = X ^ Y.
+X * (Y ^ Z) = (X * Y) ^ (X * Z).
+(X v Y) * Z = (X * Z) ^ (Y * Z).
+X ^ 0 = 0.
+X v X' = 1.
+X ^ X' = 0.
+X'' = X.
+X * Y = X' v Y.
+end_of_list.
+
+% Reading from file prover9/inputs_in/test2_input.in
+
+
+formulas(goals).
+X * X = 1.
+end_of_list.
+
+============================== end of input ==========================
+
+% Enabling option dependencies (ignore applies only on input).
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 X * X = 1 # label(non_clause) # label(goal).  [goal].
+
+============================== end of process non-clausal formulas ===
+
+============================== PROCESS INITIAL CLAUSES ===============
+
+% Clauses before input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+A ^ B = B ^ A # label(L1).  [assumption].
+A v B = B v A # label(L2).  [assumption].
+A ^ (B ^ C) = (A ^ B) ^ C # label(L3).  [assumption].
+A v (B v C) = (A v B) v C # label(L4).  [assumption].
+A v A = A # label(L5).  [assumption].
+A ^ A = A # label(L6).  [assumption].
+A v (A ^ B) = A # label(L7).  [assumption].
+A ^ (A v B) = A # label(L8).  [assumption].
+A v 1 = 1 # label(L9).  [assumption].
+A v 0 = A # label(L10).  [assumption].
+A v (B ^ C) = (A v B) ^ (A v C) # label(L11).  [assumption].
+A ^ (B v C) = (A ^ B) v (A ^ C) # label(L12).  [assumption].
+A * A = 1.  [assumption].
+(A * B) ^ B = B.  [assumption].
+A ^ (A * B) = A ^ B.  [assumption].
+A * (B ^ C) = (A * B) ^ (A * C).  [assumption].
+(A v B) * C = (A * C) ^ (B * C).  [assumption].
+A ^ 0 = 0.  [assumption].
+A v A' = 1.  [assumption].
+A ^ A' = 0.  [assumption].
+A'' = A.  [assumption].
+A * B = A' v B.  [assumption].
+c1 * c1 != 1.  [deny(1)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== PREDICATE ELIMINATION =================
+
+No predicates eliminated.
+
+============================== end predicate elimination =============
+
+Auto_denials:  (no changes).
+
+Term ordering decisions:
+Predicate symbol precedence:  predicate_order([ = ]).
+Function symbol precedence:  function_order([ 0, 1, c1, ^, v, *, ' ]).
+After inverse_order: Function symbol precedence:  function_order([ 0, 1, c1, ^, v, ', * ]).
+Unfolding symbols: */2.
+
+Auto_inference settings:
+  % set(paramodulation).  % (positive equality literals)
+
+Auto_process settings:  (no changes).
+
+
+% Operation ^ is commutative; C redundancy checks enabled.
+kept:      2 A ^ B = B ^ A # label(L1).  [assumption].
+
+% Operation v is commutative; C redundancy checks enabled.
+kept:      3 A v B = B v A # label(L2).  [assumption].
+           4 A ^ (B ^ C) = (A ^ B) ^ C # label(L3).  [assumption].
+kept:      5 (A ^ B) ^ C = A ^ (B ^ C).  [copy(4),flip(a)].
+           6 A v (B v C) = (A v B) v C # label(L4).  [assumption].
+kept:      7 (A v B) v C = A v (B v C).  [copy(6),flip(a)].
+kept:      8 A v A = A # label(L5).  [assumption].
+kept:      9 A ^ A = A # label(L6).  [assumption].
+kept:      10 A v (A ^ B) = A # label(L7).  [assumption].
+kept:      11 A ^ (A v B) = A # label(L8).  [assumption].
+kept:      12 A v 1 = 1 # label(L9).  [assumption].
+kept:      13 A v 0 = A # label(L10).  [assumption].
+kept:      14 A v (B ^ C) = (A v B) ^ (A v C) # label(L11).  [assumption].
+           15 A ^ (B v C) = (A ^ B) v (A ^ C) # label(L12).  [assumption].
+kept:      16 A ^ ((A ^ B) v C) = A ^ (B v C).  [copy(15),rewrite([14(5),3(4),10(4)]),flip(a)].
+kept:      17 A * A = 1.  [assumption].
+           18 (A * B) ^ B = B.  [assumption].
+kept:      19 A ^ (B * A) = A.  [copy(18),rewrite([2(2)])].
+kept:      20 A ^ (A * B) = A ^ B.  [assumption].
+kept:      21 A * (B ^ C) = (A * B) ^ (A * C).  [assumption].
+kept:      22 (A v B) * C = (A * C) ^ (B * C).  [assumption].
+kept:      23 A ^ 0 = 0.  [assumption].
+kept:      24 A v A' = 1.  [assumption].
+kept:      25 A ^ A' = 0.  [assumption].
+kept:      26 A'' = A.  [assumption].
+kept:      27 A * B = A' v B.  [assumption].
+           28 c1 * c1 != 1.  [deny(1)].
+
+============================== PROOF =================================
+
+% Proof 1 at 0.00 (+ 0.00) seconds.
+% Length of proof is 4.
+% Level of proof is 2.
+% Maximum clause weight is 5.000.
+% Given clauses 0.
+
+1 X * X = 1 # label(non_clause) # label(goal).  [goal].
+17 A * A = 1.  [assumption].
+28 c1 * c1 != 1.  [deny(1)].
+29 $F.  [copy(28),rewrite([17(3)]),xx(a)].
+
+============================== end of proof ==========================
+
+============================== STATISTICS ============================
+
+Given=0. Generated=23. Kept=22. proofs=1.
+Usable=0. Sos=0. Demods=22. Limbo=22, Disabled=23. Hints=0.
+Kept_by_rule=0, Deleted_by_rule=0.
+Forward_subsumed=0. Back_subsumed=0.
+Sos_limit_deleted=0. Sos_displaced=0. Sos_removed=0.
+New_demodulators=22 (2 lex), Back_demodulated=0. Back_unit_deleted=0.
+Demod_attempts=177. Demod_rewrites=5.
+Res_instance_prunes=0. Para_instance_prunes=0. Basic_paramod_prunes=0.
+Nonunit_fsub_feature_tests=0. Nonunit_bsub_feature_tests=0.
+Megabytes=0.06.
+User_CPU=0.00, System_CPU=0.00, Wall_clock=0.
+
+============================== end of statistics =====================
+
+============================== end of search =========================
+
+THEOREM PROVED
+
+Exiting with 1 proof.
+
+Process 11301 exit (max_proofs) Thu Mar 21 16:13:05 2024

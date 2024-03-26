@@ -1,0 +1,13 @@
+% test1 file for prover9/mace4
+
+%this formula is a theorem of both classical logic and intuitinistic logic
+
+%if we run prover9, we must obtain a proof
+
+%if we run mace4, we must obtain a search failed for time limit
+
+formulas(goals).
+
+X * X = 1.
+
+end_of_list.

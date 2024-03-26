@@ -1,0 +1,73 @@
+%default input file for prover9/mace4
+
+%each file containing the goal-formula for prover9 must be preceded by this default file
+
+%the only possible parameters that we may what to change in this file are the "max_seconds", which, by default, we set them to 30. 
+
+
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 10).
+  set(prolog_style_variables).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  set(prolog_style_variables).
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+% Standard aXiomatiZation for bounded distributive lattices theorY
+
+X ^ Y = Y ^ X             # label(L1).
+
+X v Y = Y v X             # label(L2).
+
+X ^ (Y ^ Z) = (X ^ Y) ^ Z # label(L3).
+
+X v (Y v Z) = (X v Y) v Z # label(L4).
+
+X v X = X                 # label(L5).
+
+X ^ X = X                 # label(L6).
+
+X v (X ^ Y) = X           # label(L7).
+
+X ^ (X v Y) = X           # label(L8).
+
+X v 1 = 1                 # label (L9).
+
+X v 0 = X                 # label (L10).
+
+X v (Y ^ Z) = (X v Y) ^ (X v Z)          # label (L11).
+
+X ^ (Y v Z) = (X ^ Y) v (X ^ Z)          # label (L12).
+
+%HeYting Algebras
+
+X * X = 1 .
+
+(X * Y) ^ Y = Y .
+
+X ^ (X * Y) = X ^ Y .
+
+X * (Y ^ Z) = (X * Y)^(X * Z) .
+
+(X v Y) * Z = (X * Z) ^ (Y * Z) .
+
+% Boolean algebras
+
+X ^ 0 = 0 .
+
+X v '(X) = 1.
+
+X ^ '(X) = 0.
+
+'('(X)) = X .
+
+X  * Y = '(X) v Y .
+
+end_of_list.
