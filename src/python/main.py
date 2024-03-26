@@ -1,4 +1,3 @@
-from openpyxl import load_workbook, Workbook  # type: ignore
 from typing import List, Any
 from vars.vars import (
     var_numbers,
