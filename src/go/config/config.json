@@ -1,7 +1,15 @@
 {
-    "csvFilePath": "../../../bin/excel/2VarComp2.csv",
+    "sheetPath": "../../../bin/excel/1var1con0part.xlsx",
     "csvComma": ";",
     "formulasChunkLength": 10,
     "formulasPrefix": "(",
-    "formulasSuffix": "= 1."
+    "formulasSuffix": "=1.",
+    "p9Exe":"../../../prover9/bin/LADR-2009-11A/bin/prover9",
+    "mace4Exe":"../../../prover9/bin/LADR-2009-11A/bin/mace4",
+    "p9DefaultInput":"../../../prover9/conf/default_input.in",
+    "p9InputDir":"../../../prover9/inputs_in/",
+    "p9OutputDir":"../../../prover9/outputs_out/",
+    "p9InputTemplate":"../../../prover9/inputs_in/input_template.in",
+    "p9InputTemplateFormulaNumber": 11,
+    "p9InputTemplateFormulaPlaceHolder": "INSERT_FORMULA_HERE"
 }

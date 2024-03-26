@@ -8,6 +8,6 @@
 
 formulas(goals).
 
-INSERT_FORMULA_HERE
+(0 * 0)=1.
 
 end_of_list.

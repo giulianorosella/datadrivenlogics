@@ -5,6 +5,7 @@ import (
 
 	"github.com/giulianorosella/ddlogic/pkg/config"
 	"github.com/giulianorosella/ddlogic/pkg/excel"
+	"github.com/giulianorosella/ddlogic/pkg/prover9/prove"
 )
 
 func main() {
@@ -21,9 +22,9 @@ func main() {
 
 	log.Printf("Loading formulas\n")
 
-	csvPath, formulaPrefix, formulaSuffix, delimiter := cfg.CSVFilePath, cfg.FormulasPrefix, cfg.FormulasSuffix, cfg.CsvComma
+	sheetPath, formulaPrefix, formulaSuffix := cfg.SheetPath, cfg.FormulasPrefix, cfg.FormulasSuffix
 
-	formulas, err := excel.ParseFormulasFromCSV(csvPath, formulaPrefix, formulaSuffix, delimiter)
+	formulas, err := excel.ParseFormulasFromXLSX(sheetPath, formulaPrefix, formulaSuffix)
 
 	if err != nil {
 		log.Fatalf("Error when loading formulas: %s", err)
@@ -36,4 +37,12 @@ func main() {
 		log.Printf("Index %d: %s\n", i, formulas[i])
 	}
 
+	modelFilePath, confInputFilePath, cmdPath, tempOutPath, tempInputPath, lineIndex := cfg.P9InputTemplate, cfg.P9DefaultInput, cfg.P9Exe, cfg.P9OutpuDir, cfg.P9InputDir, cfg.P9InputTemplateFormulaIndex
+
+	res, err := prove.LogOut(modelFilePath, confInputFilePath, cmdPath, tempOutPath, tempInputPath, lineIndex, formulas[0])
+	if err != nil {
+		log.Fatalln("error when trying to log prover9: ", err)
+	}
+
+	log.Println("Result fo calling prover9: ", res)
 }
