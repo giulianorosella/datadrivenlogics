@@ -12,9 +12,6 @@ import (
 )
 
 func Prove(confInputFilePath string, inputTempFile *os.File, cmdPath string, tempOutPath string) (*os.File, error) {
-
-	defer inputTempFile.Close()
-
 	// execute prover9
 	cmdArgs := []string{"-f", confInputFilePath, inputTempFile.Name()}
 	cmd := exec.Command(cmdPath, cmdArgs...)
@@ -53,7 +50,6 @@ func LogOut(modelFilePath string, confInputFilePath string, cmdPath string, temp
 		log.Fatalln("Error calling Prove: ", err)
 		return "", err
 	}
-	defer tempOutputFile.Close()
 
 	// Log the content of the Prover9 output file
 	tempOutBytes, err := io.ReadAll(tempOutputFile)
@@ -63,6 +59,9 @@ func LogOut(modelFilePath string, confInputFilePath string, cmdPath string, temp
 	}
 
 	fileString := string(tempOutBytes)
+
+	defer utils.CloseAndRemoveTempFile(tempOutputFile)
+	defer utils.CloseAndRemoveTempFile(tempInputFile)
 
 	return fileString, nil
 

@@ -22,3 +22,13 @@ func ResetFileOffSet(file *os.File) (*os.File, error) {
 	}
 	return file, nil
 }
+
+func CloseAndRemoveTempFile(file *os.File) error {
+	if err := file.Close(); err != nil {
+		return err
+	}
+	if err := os.Remove(file.Name()); err != nil {
+		return err
+	}
+	return nil
+}
