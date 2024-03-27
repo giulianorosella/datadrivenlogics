@@ -18,16 +18,19 @@ func Prove(confInputFilePath string, inputTempFile *os.File, cmdPath string, tem
 
 	tempOutFile, err := os.CreateTemp(tempOutPath, "outfile*.out")
 	if err != nil {
+		utils.CloseAndRemoveTempFile(tempOutFile)
 		return nil, err
 	}
 
 	cmd.Stdout = tempOutFile
 
 	if err := cmd.Run(); err != nil {
+		utils.CloseAndRemoveTempFile(tempOutFile)
 		return nil, err
 	}
 	_, err = utils.ResetFileOffSet(tempOutFile)
 	if err != nil {
+		utils.CloseAndRemoveTempFile(tempOutFile)
 		return nil, err
 	}
 

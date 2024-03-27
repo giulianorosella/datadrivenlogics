@@ -34,12 +34,12 @@ func main() {
 	log.Printf("Formulas loaded, printing first ten\n")
 
 	for i := 0; i < len(formulas) && i < 10; i++ {
-		log.Printf("Index %d: %s\n", i, formulas[i])
+		log.Printf("Index %d: %s\n", i, formulas[i].Expression)
 	}
 
 	modelFilePath, confInputFilePath, cmdPath, tempOutPath, tempInputPath, lineIndex := cfg.P9InputTemplate, cfg.P9DefaultInput, cfg.P9Exe, cfg.P9OutpuDir, cfg.P9InputDir, cfg.P9InputTemplateFormulaIndex
 
-	res, err := prove.LogOut(modelFilePath, confInputFilePath, cmdPath, tempOutPath, tempInputPath, lineIndex, formulas[0])
+	res, err := prove.LogOut(modelFilePath, confInputFilePath, cmdPath, tempOutPath, tempInputPath, lineIndex, formulas[0].Expression)
 	if err != nil {
 		log.Fatalln("error when trying to log prover9: ", err)
 	}
