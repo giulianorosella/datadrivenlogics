@@ -1,4 +1,4 @@
-package prove
+package prover9
 
 import (
 	"fmt"
@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/giulianorosella/ddlogic/pkg/prover9/inputs"
 	"github.com/giulianorosella/ddlogic/pkg/utils"
 )
 
@@ -42,7 +41,7 @@ func LogOut(modelFilePath string, confInputFilePath string, cmdPath string, temp
 
 	log.Println("Starting call of input")
 	// generate temp input file
-	tempInputFile, err := inputs.CreateTempInputFile(modelFilePath, tempInputPath, lineIndex, formula)
+	tempInputFile, err := CreateTempInputFile(modelFilePath, tempInputPath, lineIndex, formula)
 	if err != nil {
 		log.Fatalln("Error calling CreaTempInputFile: ", err)
 		return "", err

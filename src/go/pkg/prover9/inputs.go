@@ -1,4 +1,4 @@
-package inputs
+package prover9
 
 import (
 	"bufio"

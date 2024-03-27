@@ -5,7 +5,7 @@ import (
 
 	"github.com/giulianorosella/ddlogic/pkg/config"
 	"github.com/giulianorosella/ddlogic/pkg/excel"
-	"github.com/giulianorosella/ddlogic/pkg/prover9/prove"
+	"github.com/giulianorosella/ddlogic/pkg/prover9"
 	"github.com/giulianorosella/ddlogic/pkg/z3"
 )
 
@@ -42,7 +42,7 @@ func main() {
 
 	modelFilePath, confInputFilePath, cmdPath, tempOutPath, tempInputPath, lineIndex := cfg.P9InputTemplate, cfg.P9DefaultInput, cfg.P9Exe, cfg.P9OutpuDir, cfg.P9InputDir, cfg.P9InputTemplateFormulaIndex
 
-	res, err := prove.LogOut(modelFilePath, confInputFilePath, cmdPath, tempOutPath, tempInputPath, lineIndex, formulas[0].Expression)
+	res, err := prover9.LogOut(modelFilePath, confInputFilePath, cmdPath, tempOutPath, tempInputPath, lineIndex, formulas[0].Expression)
 	if err != nil {
 		log.Fatalln("error when trying to log prover9: ", err)
 	}
