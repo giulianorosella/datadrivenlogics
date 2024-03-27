@@ -6,9 +6,12 @@ import (
 	"github.com/giulianorosella/ddlogic/pkg/config"
 	"github.com/giulianorosella/ddlogic/pkg/excel"
 	"github.com/giulianorosella/ddlogic/pkg/prover9/prove"
+	"github.com/giulianorosella/ddlogic/pkg/z3"
 )
 
 func main() {
+
+	z3.TestZ3()
 	cfgPath := "../config/config.json"
 
 	log.Print("Loading configurations \n")
