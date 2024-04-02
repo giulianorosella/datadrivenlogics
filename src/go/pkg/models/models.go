@@ -3,7 +3,7 @@ package models
 type isTheorem int
 
 const (
-	Unset isTheorem = iota
+	Unset isTheorem = iota - 1
 	True
 	False
 )
