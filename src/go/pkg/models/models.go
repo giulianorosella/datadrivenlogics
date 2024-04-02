@@ -4,8 +4,8 @@ type isTheorem int
 
 const (
 	Unset isTheorem = iota - 1
-	True
 	False
+	True
 )
 
 type Formula struct {
