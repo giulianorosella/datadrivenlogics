@@ -7,10 +7,11 @@ import (
 	"os"
 	"strings"
 
+	"github.com/giulianorosella/ddlogic/pkg/models"
 	"github.com/giulianorosella/ddlogic/pkg/utils"
 )
 
-func ParseFormulasFromCSV(csvPath string, formulaPrefix string, formulaSuffix string, delimiter string) ([]string, error) {
+func ParseFormulasFromCSV(csvPath string, formulaPrefix string, formulaSuffix string, delimiter string) ([]models.Formula, error) {
 	//open file
 	file, err := os.Open(csvPath)
 	if err != nil {
@@ -27,7 +28,7 @@ func ParseFormulasFromCSV(csvPath string, formulaPrefix string, formulaSuffix st
 	}
 	reader.Comma = d
 
-	formulas := make([]string, 0)
+	formulas := []models.Formula{}
 
 	// parse excell till EOF
 	for {
@@ -42,7 +43,7 @@ func ParseFormulasFromCSV(csvPath string, formulaPrefix string, formulaSuffix st
 			cell := record[0]
 			cell = strings.TrimSpace(cell)
 			if strings.HasPrefix(cell, formulaPrefix) && strings.HasSuffix(cell, formulaSuffix) {
-				formulas = append(formulas, cell)
+				formulas = append(formulas, models.Formula{Expression: cell, IsClassicTh: models.Unset, IsIntuitionistTh: models.Unset})
 			}
 		}
 	}

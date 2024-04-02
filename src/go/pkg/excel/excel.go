@@ -4,17 +4,18 @@ import (
 	"errors"
 	"strings"
 
+	"github.com/giulianorosella/ddlogic/pkg/models"
 	"github.com/tealeg/xlsx"
 )
 
-func ParseFormulasFromXLSX(xlsxPath string, formulaPrefix string, formulaSuffix string) ([]string, error) {
+func ParseFormulasFromXLSX(xlsxPath string, formulaPrefix string, formulaSuffix string) ([]models.Formula, error) {
 	// open file
 	xlFile, err := xlsx.OpenFile(xlsxPath)
 	if err != nil {
 		return nil, err
 	}
 
-	formulas := make([]string, 0)
+	formulas := []models.Formula{}
 
 	// iterate on cells
 	for _, sheet := range xlFile.Sheets {
@@ -25,7 +26,8 @@ func ParseFormulasFromXLSX(xlsxPath string, formulaPrefix string, formulaSuffix 
 
 				// check cell
 				if strings.HasPrefix(cellValue, formulaPrefix) && strings.HasSuffix(cellValue, formulaSuffix) {
-					formulas = append(formulas, cellValue)
+					formula := models.Formula{Expression: strings.TrimSpace(cellValue), IsClassicTh: models.Unset, IsIntuitionistTh: models.Unset}
+					formulas = append(formulas, formula)
 				}
 			}
 		}

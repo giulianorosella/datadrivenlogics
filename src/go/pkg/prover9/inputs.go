@@ -1,4 +1,4 @@
-package inputs
+package prover9
 
 import (
 	"bufio"
@@ -39,7 +39,7 @@ func CreateTempInputFile(modelFilePath string, outputPath string, lineIndex int,
 	for _, line := range lines {
 		_, err := writer.WriteString((line + "\n"))
 		if err != nil {
-			tempFile.Close()
+			utils.CloseAndRemoveTempFile(tempFile)
 			return nil, err
 		}
 	}
@@ -49,7 +49,7 @@ func CreateTempInputFile(modelFilePath string, outputPath string, lineIndex int,
 	// reset the pointer to the beginning of the file
 	_, err = utils.ResetFileOffSet(tempFile)
 	if err != nil {
-		tempFile.Close()
+		utils.CloseAndRemoveTempFile(tempFile)
 		return nil, err
 	}
 

@@ -15,7 +15,7 @@ type Config struct {
 	Mace4Exe                          string `json:"mace4Exe"`
 	P9DefaultInput                    string `json:"p9DefaultInput"`
 	P9InputDir                        string `json:"p9InputDir"`
-	P9OutpuDir                        string `json:"p9OutpuDir"`
+	P9OutpuDir                        string `json:"p9OutputDir"`
 	P9InputTemplate                   string `json:"p9InputTemplate"`
 	P9InputTemplateFormulaIndex       int    `json:"p9InputTemplateFormulaNumber"`
 	P9InputTemplateFormulaPlaceholder string `json:"p9InputTemplateFormulaPlaceHolder"`
