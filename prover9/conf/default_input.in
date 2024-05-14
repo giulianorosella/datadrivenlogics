@@ -58,16 +58,5 @@ X * (Y ^ Z) = (X * Y)^(X * Z) .
 
 (X v Y) * Z = (X * Z) ^ (Y * Z) .
 
-% Boolean algebras
-
-X ^ 0 = 0 .
-
-X v '(X) = 1.
-
-X ^ '(X) = 0.
-
-'('(X)) = X .
-
-X  * Y = '(X) v Y .
 
 end_of_list.
