@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 	"sync"
 
 	"github.com/giulianorosella/ddlogic/pkg/config"
@@ -13,7 +14,12 @@ import (
 
 func main() {
 
-	cfgPath := "../config/config.json"
+	env := os.Getenv("ENV")
+
+	cfgPath := "./config/config.json"
+	if env == "dev" {
+		cfgPath = "../config/config_dev.json"
+	}
 
 	log.Print("Loading configurations \n")
 
