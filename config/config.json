@@ -2,7 +2,7 @@
     "varNum": 2,
     "conNum":2,
     "formulasChunkLength": 10,
-    "csvFileName": "./outs/res.csv",
+    "csvFileName": "../outs/res.csv",
     "p9Exe":"../prover9/bin/LADR-2009-11A/bin/prover9",
     "mace4Exe":"../prover9/bin/LADR-2009-11A/bin/mace4",
     "p9DefaultInput":"../prover9/conf/default_input.in",

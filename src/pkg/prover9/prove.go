@@ -18,7 +18,7 @@ type CmdArgs struct {
 	tempOutPath       string
 }
 
-func prove(confInputFilePath string, inputTempFile *os.File, cmdPath string, cmdArgs CmdArgs) (*os.File, error) {
+func prove(inputTempFile *os.File, cmdPath string, cmdArgs CmdArgs) (*os.File, error) {
 	args := append(cmdArgs.flags, cmdArgs.confInputFilePath, inputTempFile.Name())
 	cmd := exec.Command(cmdPath, args...)
 
@@ -81,7 +81,7 @@ func GetProofs(modelFilePath string, confInputFilePath string, p9CmdPath string,
 	}
 
 	//call p9
-	p9TempOutputFile, err := prove(confInputFilePath, tempInputFile, p9CmdPath, p9Args)
+	p9TempOutputFile, err := prove(tempInputFile, p9CmdPath, p9Args)
 	if err != nil {
 		log.Fatalln("Error calling Prover9: ", err)
 		return f, err
@@ -102,7 +102,7 @@ func GetProofs(modelFilePath string, confInputFilePath string, p9CmdPath string,
 		isM4 = false
 	} else {
 		//call m4
-		m4TempOutputFile, err := prove(confInputFilePath, tempInputFile, m4CmdPath, m4Args)
+		m4TempOutputFile, err := prove(tempInputFile, m4CmdPath, m4Args)
 		if err != nil {
 			log.Fatalln("Error calling Mace4: ", err)
 			return f, err
