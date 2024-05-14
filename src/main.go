@@ -16,7 +16,7 @@ func main() {
 
 	env := os.Getenv("ENV")
 
-	cfgPath := "./config/config.json"
+	cfgPath := "../config/config.json"
 	if env == "dev" {
 		cfgPath = "../config/config_dev.json"
 	}
