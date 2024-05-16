@@ -14,7 +14,9 @@ func generateBoolVars(varsNum int, ctx *z3.Context) []z3.Bool {
 		formula := ctx.BoolConst(string(letter))
 		formulas = append(formulas, formula)
 	}
-	return append([]z3.Bool{ctx.FromBool(false)}, formulas...)
+	res := append([]z3.Bool{ctx.FromBool(false)}, formulas...)
+
+	return res
 }
 
 func ProveClassic(c, v int) ([]models.Formula, error) {
