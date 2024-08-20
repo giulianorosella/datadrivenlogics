@@ -26,5 +26,5 @@ queries
 
 
 #Ignore config files
-src/config/config_dev.json
-src/config/config.json
+./src/config/config_dev.json
+./src/config/config.json
