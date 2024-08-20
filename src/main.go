@@ -57,7 +57,7 @@ func main() {
 		log.Fatalln("error when trying to log prover9: ", err)
 	}
 
-	db, err := persistance.InitDb()
+	db, err := persistance.InitDb(cfg.Server, cfg.User, cfg.Password, cfg.Database, cfg.Port)
 	if err != nil {
 		return
 	}
