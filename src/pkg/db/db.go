@@ -13,11 +13,6 @@ import (
 
 func InitDb(server, user, password, database string, port int) (*sql.DB, error) {
 	var db *sql.DB
-	// var server = cfg.Server
-	// var port = cfg.Port
-	// var user = cfg.User
-	// var password = cfg.Password
-	// var database = cfg.Database
 	// Build connection string
 	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%d;database=%s;",
 		server, user, password, port, database)
