@@ -32,7 +32,7 @@ func main() {
 
 	log.Printf("Loading formulas fr z3\n")
 
-	formulas, err := generator.ProveClassic(1, 1)
+	formulas, err := generator.ProveClassic(cfg.ConNum, cfg.VarNum)
 
 	if err != nil {
 		log.Fatalf("Something went wrong when proving for z3: %s", err)

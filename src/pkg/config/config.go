@@ -18,6 +18,12 @@ type Config struct {
 	P9InputTemplate                   string `json:"p9InputTemplate"`
 	P9InputTemplateFormulaIndex       int    `json:"p9InputTemplateFormulaNumber"`
 	P9InputTemplateFormulaPlaceholder string `json:"p9InputTemplateFormulaPlaceHolder"`
+	Db                                string `json:"db"`
+	Server                            any    `json:"server"`
+	Port                              int    `json:"port"`
+	User                              string `json:"user"`
+	Password                          string `json:"password"`
+	Database                          any    `json:"database"`
 }
 
 func LoadConfig(configPath string) (Config, error) {

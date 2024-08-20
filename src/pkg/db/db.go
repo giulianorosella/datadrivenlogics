@@ -9,15 +9,16 @@ import (
 
 	"github.com/giulianorosella/ddlogic/pkg/models"
 	"github.com/microsoft/go-mssqldb/azuread"
+	"golang.org/x/tools/go/cfg"
 )
 
 func InitDb() (*sql.DB, error) {
-	var db *sql.DB
-	var server = "ddlogic.database.windows.net"
-	var port = 1433
-	var user = "dev"
-	var password = "lalogicacontinua123?"
-	var database = "ddlogic"
+	var db = cfg.Db
+	var server = cfg.Server
+	var port = cfg.Port
+	var user = cfg.User
+	var password = cfg.Password
+	var database = cfg.Database
 	// Build connection string
 	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%d;database=%s;",
 		server, user, password, port, database)

@@ -10,5 +10,11 @@
     "p9OutputDir":"../prover9/outputs_out/",
     "p9InputTemplate":"../prover9/inputs_in/input_template.in",
     "p9InputTemplateFormulaNumber": 11,
-    "p9InputTemplateFormulaPlaceHolder": "INSERT_FORMULA_HERE"
+    "p9InputTemplateFormulaPlaceHolder": "INSERT_FORMULA_HERE",
+    "db": "*sql.DB",
+    "server": "",
+    "port": 1433,
+    "user": "giuliano",
+    "password": "",
+    "database": ""
 }

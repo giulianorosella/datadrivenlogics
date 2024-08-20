@@ -1,6 +1,6 @@
 {
-    "varNum": 2,
-    "conNum":2,
+    "varNum": 1,
+    "conNum":3,
     "formulasChunkLength": 10,
     "csvFileName": "./outs/res.csv",
     "p9Exe":"../prover9/bin/LADR-2009-11A/bin/prover9",
@@ -10,5 +10,11 @@
     "p9OutputDir":"../prover9/outputs_out/",
     "p9InputTemplate":"../prover9/inputs_in/input_template.in",
     "p9InputTemplateFormulaNumber": 11,
-    "p9InputTemplateFormulaPlaceHolder": "INSERT_FORMULA_HERE"
+    "p9InputTemplateFormulaPlaceHolder": "INSERT_FORMULA_HERE",
+    "db": "*sql.DB",
+    "server": "",
+    "port": 1433,
+    "user": "giuliano",
+    "password": "",
+    "database": ""
 }
