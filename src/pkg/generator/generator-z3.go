@@ -14,7 +14,9 @@ func generateBoolVars(varsNum int, ctx *z3.Context) []z3.Bool {
 		formula := ctx.BoolConst(string(letter))
 		formulas = append(formulas, formula)
 	}
-	return append([]z3.Bool{ctx.FromBool(false)}, formulas...)
+	res := append([]z3.Bool{ctx.FromBool(false)}, formulas...)
+
+	return res
 }
 
 func ProveClassic(c, v int) ([]models.Formula, error) {
@@ -63,6 +65,7 @@ func generateFormulasForZ3(connectivesNum, varsNum int, ctx *z3.Context) []z3.Bo
 				index = append(index, []int{i, j})
 			}
 		}
+		res = make([]z3.Bool, 0)
 		for _, pair := range index {
 			res = append(res, getBinCombZ3(generateFormulasForZ3(pair[0], varsNum, ctx), generateFormulasForZ3(pair[1], varsNum, ctx))...)
 		}

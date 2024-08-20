@@ -40,6 +40,7 @@ func generateFormulasForP9(connectivesNum, varsNum int) []string {
 				index = append(index, []int{i, j})
 			}
 		}
+		res = make([]string, 0)
 		for _, pair := range index {
 			res = append(res, getBinCombP9(generateFormulasForP9(pair[0], varsNum), generateFormulasForP9(pair[1], varsNum))...)
 		}

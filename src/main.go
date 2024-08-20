@@ -2,11 +2,11 @@ package main
 
 import (
 	"log"
-	"os"
 	"sync"
 
 	"github.com/giulianorosella/ddlogic/pkg/config"
 	"github.com/giulianorosella/ddlogic/pkg/csv"
+	persistance "github.com/giulianorosella/ddlogic/pkg/db"
 	"github.com/giulianorosella/ddlogic/pkg/generator"
 	"github.com/giulianorosella/ddlogic/pkg/models"
 	"github.com/giulianorosella/ddlogic/pkg/prover9"
@@ -14,10 +14,10 @@ import (
 
 func main() {
 
-	env := os.Getenv("ENV")
+	// env := os.Getenv("ENV")
 
-	cfgPath := "../config/config.json"
-	if env == "dev" {
+	cfgPath := "./config/config_dev.json"
+	if false {
 		cfgPath = "../config/config_dev.json"
 	}
 
@@ -32,14 +32,14 @@ func main() {
 
 	log.Printf("Loading formulas fr z3\n")
 
-	formulas, err := generator.ProveClassic(cfg.VarNum, cfg.ConNum)
+	formulas, err := generator.ProveClassic(cfg.ConNum, cfg.VarNum)
 
 	if err != nil {
 		log.Fatalf("Something went wrong when proving for z3: %s", err)
 	}
 
 	log.Print("Preparing strings for Prover9")
-	p9Strings := generator.P9FormulasCreationInit(cfg.VarNum, cfg.ConNum)
+	p9Strings := generator.P9FormulasCreationInit(cfg.ConNum, cfg.VarNum)
 
 	for i, p9String := range p9Strings {
 		formulas[i].Expression = p9String
@@ -56,6 +56,26 @@ func main() {
 	if err != nil {
 		log.Fatalln("error when trying to log prover9: ", err)
 	}
+
+	db, err := persistance.InitDb(cfg.Server, cfg.User, cfg.Password, cfg.Database, cfg.Port)
+	if err != nil {
+		return
+	}
+
+	inputsExists, err := persistance.InputsExist(db, cfg.ConNum, cfg.VarNum)
+
+	if err != nil || inputsExists {
+		if inputsExists {
+			log.Fatal("Inputs exists already in db, aborting")
+		}
+		return
+	}
+
+	inputsId, err := persistance.CreateInputs(db, cfg.ConNum, cfg.VarNum)
+	if err != nil {
+		return
+	}
+	log.Println("Added inputs to db", inputsId)
 
 	var wg sync.WaitGroup
 	maxWorkers := cfg.FormulasChunkLength
@@ -84,7 +104,11 @@ func main() {
 			}
 			log.Println("just updated in res ", i)
 			res = append(res, formula)
-
+			formulaId, err := persistance.CreateFormula(db, formula)
+			if err != nil {
+				return
+			}
+			log.Println("Added to db", formulaId)
 		}(formula)
 	}
 
@@ -92,4 +116,5 @@ func main() {
 	wg.Wait()
 	log.Println(res)
 	csv.CreateCSV(cfg.CsvFileName, res)
+
 }
