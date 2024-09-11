@@ -1,0 +1,4 @@
+{
+    "git.confirmSync": false,
+    "go.formatTool": "gofmt"
+}

@@ -1,0 +1,19 @@
+{
+  "varNum": 1,
+  "conNum": 1,
+  "formulasChunkLength": 10,
+  "csvFileName": "../outs/res.csv",
+  "p9Exe": "../lib/prover9/bin/LADR-2009-11A/bin/prover9",
+  "mace4Exe": "../lib/prover9/bin/LADR-2009-11A/bin/mace4",
+  "p9DefaultInput": "../prover9/conf/default_input.in",
+  "p9InputDir": "../prover9/inputs_in/",
+  "p9OutputDir": "../prover9/outputs_out/",
+  "p9InputTemplate": "../prover9/inputs_in/input_template.in",
+  "p9InputTemplateFormulaNumber": 11,
+  "p9InputTemplateFormulaPlaceHolder": "INSERT_FORMULA_HERE",
+  "server": "",
+  "port": 1433,
+  "user": "giuliano",
+  "password": "",
+  "database": ""
+}
