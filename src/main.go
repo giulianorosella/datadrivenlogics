@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/giulianorosella/ddlogic/pkg/config"
@@ -15,9 +16,7 @@ import (
 
 func main() {
 
-	// env := os.Getenv("ENV")
-
-	cfgPath := "./config/config.json"
+	cfgPath := "/usr/local/bin/config/config.json"
 
 	log.Print("Loading configurations \n")
 
@@ -31,7 +30,9 @@ func main() {
 	dbName := os.Getenv("DB_NAME")
 	dbPort, portErr := strconv.Atoi(os.Getenv("DB_PORT"))
 	dbUser := os.Getenv("DB_USER")
-	if dbPassword == "" || dbServer == "" || dbName == "" || portErr != nil|| dbUser == "" {
+	isAzure := strings.ToLower(os.Getenv("IS_AZURE")) == "true" || os.Getenv("IS_AZURE") == "1"
+
+	if dbPassword == "" || dbServer == "" || dbName == "" || portErr != nil || dbUser == "" {
 		log.Fatalln("Could not retrive db secrets, disconnecting")
 		return
 	}
@@ -65,25 +66,40 @@ func main() {
 		log.Fatalln("error when trying to log prover9: ", err)
 	}
 
-	db, err := persistance.InitDb(dbServer, dbUser, dbPassword, dbName, dbPort)
+	db, err := persistance.InitDb(dbServer, dbUser, dbPassword, dbName, dbPort, isAzure)
 	if err != nil {
 		return
 	}
+	var inputsExists bool
+	var isTableCreated bool
 
-	inputsExists, err := persistance.InputsExist(db, cfg.ConNum, cfg.VarNum)
-
-	if err != nil || inputsExists {
-		if inputsExists {
-			log.Fatal("Inputs exists already in db, aborting")
+	if isAzure {
+		inputsExists, err = persistance.InputsExistAzure(db, cfg.ConNum, cfg.VarNum)
+		if err != nil {
+			log.Println("InputExistsAzure returned error: ", err)
+			return
 		}
+		isTableCreated, err = persistance.CreateTableAzure(db, cfg.ConNum, cfg.VarNum)
+
+	} else {
+		inputsExists, err = persistance.InputsExist(db, cfg.ConNum, cfg.VarNum)
+		if err != nil {
+			log.Println("InputExists returned error: ", err)
+			return
+		}
+		isTableCreated, err = persistance.CreateTable(db, cfg.ConNum, cfg.VarNum)
+	}
+
+	if inputsExists {
+		log.Fatal("Inputs exists already in db, aborting")
 		return
 	}
 
-	inputsId, err := persistance.CreateInputs(db, cfg.ConNum, cfg.VarNum)
-	if err != nil {
-		return
+	if !isTableCreated || err != nil {
+		log.Fatal("Could not create table: ", err)
 	}
-	log.Println("Added inputs to db", inputsId)
+
+	log.Printf("Going to print %d formulas", len(formulas))
 
 	var wg sync.WaitGroup
 	maxWorkers := cfg.FormulasChunkLength
@@ -112,17 +128,18 @@ func main() {
 			}
 			log.Println("just updated in res ", i)
 			res = append(res, formula)
-			formulaId, err := persistance.CreateFormula(db, formula)
+
+			formulaId, err := persistance.CreateFormula(db, formula, cfg.ConNum, cfg.VarNum, isAzure)
 			if err != nil {
+				log.Println("Could not update in db formula: ", formula.Expression, err.Error())
 				return
 			}
 			log.Println("Added to db", formulaId)
 		}(formula)
 	}
 
-	// Wait for all goroutines to finish
+	// wait for all goroutines to finish
 	wg.Wait()
 	log.Println(res)
 	log.Println("Finished successfully")
-	return
 }
