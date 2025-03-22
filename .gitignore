@@ -20,3 +20,13 @@ prover9/bin/LADR-2009-11A
 
 #Ignore go bin folder
 bin
+
+#Ignore query folder
+queries
+
+
+#Ignore config files
+src/config/
+
+#Ignore Docker deps
+lib
