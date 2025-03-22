@@ -30,7 +30,7 @@ func prove(inputTempFile *os.File, cmdPath string, cmdArgs CmdArgs) (*os.File, e
 
 	cmd.Stdout = tempOutFile
 
-	// We will considers wait errors as unproved theorems
+	// we will considers wait errors as unproved theorems
 	if err := cmd.Run(); err != nil {
 		errorIsWait := false
 

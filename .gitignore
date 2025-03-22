@@ -27,3 +27,6 @@ queries
 
 #Ignore config files
 src/config/
+
+#Ignore Docker deps
+lib
